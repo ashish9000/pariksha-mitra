@@ -1,1 +1,110 @@
 
+name: Daily Current Affairs & Jobs Update
+
+on:
+  schedule:
+    # Roz raat 11:30 baje IST (6:00 PM UTC)
+    - cron: '0 18 * * *'
+    
+    # Har 6 ghante jobs check
+    - cron: '0 */6 * * *'
+  
+  # Manual run ke liye bhi
+  workflow_dispatch:
+
+jobs:
+  update-content:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch Current Affairs
+        env:
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: python scripts/fetch_affairs.py
+
+      - name: Fetch Govt Jobs
+        env:
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+        run: python scripts/fetch_jobs.py
+
+      - name: Generate Quiz Questions
+        if: github.event.schedule == '0 18 * * 0'
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: python scripts/generate_quiz.py
+
+      - name: Commit and Push updates
+        run: |
+          git config --global user.name "ParikshaMitra Bot"
+          git config --global user.email "bot@pariksha.mitra"
+          git add data/
+          git diff --staged --quiet || git commit -m "ðŸ¤– Auto update: $(date +'%Y-%m-%d %H:%M') IST"
+          git push
+
+  weekly-quiz:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 2 * * 0'
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests
+
+      - name: Generate Weekly Quiz
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: python scripts/generate_quiz.py
+
+      - name: Push Quiz Update
+        run: |
+          git config --global user.name "ParikshaMitra Bot"
+          git config --global user.email "bot@pariksha.mitra"
+          git add data/quiz.json
+          git diff --staged --quiet || git commit -m "ðŸ“ Weekly quiz update: $(date +'%Y-%m-%d')"
+          git push
+
+  monthly-summary:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 3 1 * *'
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests
+
+      - name: Create Monthly Summary
+        run: python scripts/monthly_summary.py
+
+      - name: Push Monthly Summary
+        run: |
+          git config --global user.name "ParikshaMitra Bot"
+          git config --global user.email "bot@pariksha.mitra"
+          git add data/
+          git diff --staged --quiet || git commit -m "ðŸ“Š Monthly summary: $(date +'%B %Y')"
+          git push
