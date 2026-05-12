@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ParikshaMitra — SSC | UPSC | Railway | Bank</title>
+<meta name="description" content="Free SSC UPSC Railway Bank PO preparation — Quiz, Current Affairs, Jobs, AI Doubt Chat">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!--
+╔══════════════════════════════════════════════════════╗
+║         ParikshaMitra v2.0 — SETUP                   ║
+╠══════════════════════════════════════════════════════╣
+║  1. GEMINI_API_KEY → aistudio.google.com (free)      ║
+║  2. GitHub repo mein ye file → index.html            ║
+║  3. data/ folder ke JSON files bhi upload karo       ║
+║  4. GitHub Pages ON karo                             ║
+╚══════════════════════════════════════════════════════╝
+-->
+
+<style>
+:root {
+  --saffron: #FF6B00;
+  --saffron2: #FF8C38;
+  --navy: #0A1628;
+  --navy2: #112240;
+  --navy3: #1A3055;
+  --card: rgba(17,34,64,0.9);
+  --green: #00D4A0;
+  --gold: #FFD700;
+  --red: #FF4757;
+  --purple: #7C6FF7;
+  --blue: #4A9EFF;
+  --text1: #F0F6FF;
+  --text2: #8BA7C7;
+  --border: rgba(255,107,0,0.15);
+  --radius: 16px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
+body{
+  font-family:'Baloo 2',sans-serif;
+  background:var(--navy);
+  color:var(--text1);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 0%,rgba(255,107,0,0.07) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 80%,rgba(0,212,160,0.05) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 50%,rgba(74,158,255,0.03) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* ── HEADER ── */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,22,40,0.96);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 16px;
+}
+.hdr{
+  max-width:900px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:54px;
+}
+.logo{display:flex;align-items:center;gap:8px;}
+.logo-box{
+  width:34px;height:34px;
+  background:linear-gradient(135deg,var(--saffron),var(--saffron2));
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;
+}
+.logo-name{font-size:17px;font-weight:800;}
+.logo-name span{color:var(--saffron);}
+.hdr-right{display:flex;gap:8px;align-items:center;}
+.btn-lang{
+  background:var(--navy3);border:1px solid var(--border);
+  color:var(--text2);padding:5px 11px;border-radius:20px;
+  font-size:12px;font-family:inherit;font-weight:600;cursor:pointer;
+  transition:.2s;
+}
+.btn-lang:hover{border-color:var(--saffron);color:var(--saffron);}
+.btn-premium{
+  background:linear-gradient(135deg,var(--gold),#FFA500);
+  color:var(--navy);border:none;padding:5px 13px;border-radius:20px;
+  font-size:12px;font-weight:800;font-family:inherit;cursor:pointer;
+}
+
+/* ── NAV ── */
+nav{
+  background:rgba(10,22,40,0.95);
+  border-bottom:1px solid var(--border);
+  overflow-x:auto;scrollbar-width:none;
+  position:sticky;top:54px;z-index:99;
+}
+nav::-webkit-scrollbar{display:none;}
+.nav-inner{
+  display:flex;max-width:900px;margin:0 auto;padding:0 8px;
+}
+.ntab{
+  display:flex;align-items:center;gap:5px;
+  padding:11px 14px;
+  font-size:12px;font-weight:700;font-family:inherit;
+  color:var(--text2);background:none;border:none;
+  border-bottom:3px solid transparent;
+  cursor:pointer;white-space:nowrap;transition:.2s;
+}
+.ntab.active{color:var(--saffron);border-bottom-color:var(--saffron);}
+.ntab:hover{color:var(--text1);}
+
+/* ── MAIN ── */
+main{max-width:900px;margin:0 auto;padding:16px 14px 90px;position:relative;z-index:1;}
+.sec{display:none;}
+.sec.active{display:block;}
+
+/* ── CARDS ── */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px;
+  transition:.2s;
+}
+.card:hover{border-color:rgba(255,107,0,0.3);}
+
+/* ── CHIPS ── */
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
+.chip{
+  padding:5px 13px;border-radius:20px;
+  border:1px solid var(--border);background:var(--card);
+  color:var(--text2);font-size:12px;font-weight:600;
+  font-family:inherit;cursor:pointer;transition:.2s;
+}
+.chip.on{background:var(--saffron);color:#fff;border-color:var(--saffron);}
+.chip:hover:not(.on){border-color:var(--saffron);color:var(--saffron);}
+
+/* ── BUTTONS ── */
+.btn{
+  padding:11px 22px;border-radius:12px;border:none;
+  font-size:13px;font-weight:700;font-family:inherit;
+  cursor:pointer;transition:.2s;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:linear-gradient(135deg,var(--saffron),var(--saffron2));color:#fff;}
+.btn-ghost{background:var(--card);border:1px solid var(--border);color:var(--text1);}
+.btn-green{background:linear-gradient(135deg,var(--green),#00A880);color:var(--navy);}
+.btn-block{width:100%;justify-content:center;}
+
+/* ── SECTION TITLE ── */
+.stitle{font-size:20px;font-weight:800;margin-bottom:4px;}
+.stitle span{color:var(--saffron);}
+.ssub{font-size:12px;color:var(--text2);margin-bottom:16px;}
+
+/* ════════════════════════════════
+   HOME
+════════════════════════════════ */
+.welcome{
+  background:linear-gradient(135deg,rgba(255,107,0,0.12),rgba(0,212,160,0.06));
+  border:1px solid rgba(255,107,0,0.25);
+  border-radius:20px;padding:18px;margin-bottom:16px;
+  display:flex;align-items:center;gap:14px;
+}
+.welcome-emoji{font-size:44px;}
+.welcome h2{font-size:17px;font-weight:800;}
+.welcome p{font-size:12px;color:var(--text2);margin-top:3px;}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.stat{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:12px;text-align:center;
+}
+.stat-n{font-size:22px;font-weight:800;color:var(--saffron);}
+.stat-l{font-size:11px;color:var(--text2);margin-top:2px;}
+
+.exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:16px;}
+.exam-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;
+  cursor:pointer;transition:.2s;text-align:center;
+  position:relative;overflow:hidden;
+}
+.exam-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+}
+.exam-card.ssc::before{background:linear-gradient(90deg,#FF6B00,#FF8C38);}
+.exam-card.upsc::before{background:linear-gradient(90deg,#7C6FF7,#9B88FF);}
+.exam-card.rail::before{background:linear-gradient(90deg,#00D4A0,#00B880);}
+.exam-card.bank::before{background:linear-gradient(90deg,#FFD700,#FFA500);}
+.exam-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.exam-icon{font-size:30px;margin-bottom:7px;}
+.exam-name{font-size:15px;font-weight:800;}
+.exam-sub{font-size:11px;color:var(--text2);margin-top:2px;}
+
+/* ════════════════════════════════
+   EXAM COUNTDOWN
+════════════════════════════════ */
+.exam-countdown-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;margin-bottom:10px;
+  border-left:3px solid var(--saffron);
+}
+.ec-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.ec-name{font-size:14px;font-weight:800;}
+.ec-org{font-size:11px;color:var(--text2);margin-top:2px;}
+.ec-badge{
+  padding:4px 10px;border-radius:8px;font-size:11px;font-weight:700;
+  white-space:nowrap;flex-shrink:0;
+}
+.badge-active{background:rgba(0,212,160,.15);color:var(--green);}
+.badge-upcoming{background:rgba(255,215,0,.15);color:var(--gold);}
+.badge-closed{background:rgba(255,71,87,.15);color:var(--red);}
+.countdown-boxes{display:flex;gap:7px;margin:12px 0 10px;}
+.cd-box{
+  background:var(--navy2);border:1px solid var(--border);
+  border-radius:10px;padding:7px 10px;text-align:center;flex:1;
+}
+.cd-num{font-size:18px;font-weight:800;color:var(--saffron);}
+.cd-label{font-size:9px;color:var(--text2);margin-top:1px;}
+.ec-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:10px;}
+.ec-links{display:flex;gap:7px;}
+.ec-link{
+  flex:1;padding:8px;border-radius:9px;border:none;
+  font-size:11px;font-weight:700;font-family:inherit;
+  cursor:pointer;text-align:center;text-decoration:none;
+  display:block;transition:.2s;
+}
+.ec-link.info{background:rgba(74,158,255,.15);color:var(--blue);}
+.ec-link.apply{background:linear-gradient(135deg,var(--green),#00A880);color:var(--navy);}
+.ec-link:hover{transform:scale(1.02);}
+
+/* ════════════════════════════════
+   QUIZ
+════════════════════════════════ */
+.quiz-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;margin-bottom:10px;
+  cursor:pointer;transition:.2s;
+  display:flex;align-items:center;gap:12px;
+}
+.quiz-card:hover{border-color:var(--saffron);transform:translateX(3px);}
+.qc-icon{
+  width:46px;height:46px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.qc-info{flex:1;}
+.qc-title{font-size:14px;font-weight:700;}
+.qc-meta{font-size:11px;color:var(--text2);margin-top:3px;}
+.qc-badge{
+  padding:4px 9px;border-radius:8px;
+  font-size:11px;font-weight:700;flex-shrink:0;
+}
+.free-badge{background:rgba(0,212,160,.15);color:var(--green);}
+.pro-badge{background:rgba(255,215,0,.15);color:var(--gold);}
+
+/* Quiz Player */
+#qplayer{display:none;}
+.qbar{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:13px 15px;margin-bottom:13px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.qtimer{
+  background:rgba(255,71,87,.1);border:1px solid rgba(255,71,87,.3);
+  color:var(--red);padding:5px 13px;border-radius:20px;
+  font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;
+}
+.qtimer.warn{animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.qprog{
+  background:var(--navy2);border-radius:4px;height:5px;
+  margin-bottom:13px;overflow:hidden;
+}
+.qprog-fill{
+  height:100%;border-radius:4px;
+  background:linear-gradient(90deg,var(--saffron),var(--saffron2));
+  transition:width .3s;
+}
+.qcard{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:18px;margin-bottom:13px;
+}
+.qnum{font-size:11px;color:var(--text2);margin-bottom:7px;}
+.qtext{font-size:15px;font-weight:600;line-height:1.65;margin-bottom:18px;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{
+  display:flex;align-items:center;gap:11px;
+  padding:12px 14px;
+  background:var(--navy2);border:2px solid var(--border);
+  border-radius:11px;color:var(--text1);
+  font-size:13px;font-family:inherit;font-weight:500;
+  cursor:pointer;transition:.2s;text-align:left;width:100%;
+}
+.opt:hover:not(:disabled){border-color:var(--saffron);background:rgba(255,107,0,.07);}
+.opt.correct{border-color:var(--green);background:rgba(0,212,160,.08);color:var(--green);}
+.opt.wrong{border-color:var(--red);background:rgba(255,71,87,.08);color:var(--red);}
+.opt-lbl{
+  width:26px;height:26px;border-radius:7px;
+  background:var(--border);display:flex;align-items:center;
+  justify-content:center;font-weight:800;font-size:12px;flex-shrink:0;
+}
+.explain-box{
+  background:rgba(0,212,160,.06);border:1px solid rgba(0,212,160,.2);
+  border-radius:11px;padding:12px;margin-top:10px;
+  font-size:13px;color:var(--text2);line-height:1.6;display:none;
+}
+.explain-box.show{display:block;}
+.qnav{display:flex;gap:9px;}
+
+/* Result */
+#qresult{display:none;}
+.result-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:24px;padding:28px 20px;text-align:center;margin-bottom:16px;
+}
+.r-pct{
+  font-size:60px;font-weight:800;
+  background:linear-gradient(135deg,var(--saffron),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.r-msg{font-size:18px;font-weight:700;margin:7px 0;}
+.r-meta{font-size:13px;color:var(--text2);}
+.r-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px;}
+.r-stat{background:var(--navy2);border-radius:11px;padding:11px;}
+.r-stat-n{font-size:19px;font-weight:800;}
+.r-stat-l{font-size:11px;color:var(--text2);margin-top:2px;}
+
+/* ════════════════════════════════
+   NEWS / CURRENT AFFAIRS
+════════════════════════════════ */
+.ca-tabs{display:flex;gap:7px;margin-bottom:14px;}
+.ca-tab{
+  padding:7px 15px;border-radius:10px;
+  border:1px solid var(--border);background:var(--card);
+  color:var(--text2);font-size:12px;font-weight:600;
+  font-family:inherit;cursor:pointer;transition:.2s;
+}
+.ca-tab.on{background:var(--saffron);color:#fff;border-color:var(--saffron);}
+.ca-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;margin-bottom:10px;
+  border-left:3px solid var(--saffron);cursor:pointer;transition:.2s;
+}
+.ca-card:hover{transform:translateX(3px);}
+.ca-date{font-size:10px;color:var(--saffron);font-weight:700;margin-bottom:5px;}
+.ca-title{font-size:14px;font-weight:700;line-height:1.5;}
+.ca-content{
+  font-size:12px;color:var(--text2);margin-top:7px;
+  line-height:1.65;display:none;
+}
+.ca-card.open .ca-content{display:block;}
+.ca-cat{
+  display:inline-block;padding:2px 8px;border-radius:6px;
+  font-size:10px;font-weight:700;margin-top:8px;
+  background:rgba(255,107,0,.12);color:var(--saffron);
+}
+.ca-src{font-size:10px;color:var(--text2);margin-top:5px;}
+
+/* ════════════════════════════════
+   JOBS
+════════════════════════════════ */
+.job-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;margin-bottom:10px;transition:.2s;
+}
+.job-card:hover{border-color:var(--green);transform:translateY(-2px);}
+.job-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.job-title{font-size:14px;font-weight:800;}
+.job-org{font-size:11px;color:var(--text2);margin-top:2px;}
+.days-badge{
+  padding:4px 10px;border-radius:8px;font-size:11px;font-weight:700;
+  white-space:nowrap;flex-shrink:0;
+}
+.days-safe{background:rgba(0,212,160,.12);color:var(--green);}
+.days-warn{background:rgba(255,215,0,.12);color:var(--gold);}
+.days-danger{background:rgba(255,71,87,.12);color:var(--red);}
+.job-details{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;}
+.job-detail{font-size:11px;color:var(--text2);display:flex;align-items:center;gap:4px;}
+.job-apply{
+  margin-top:11px;width:100%;padding:9px;
+  background:linear-gradient(135deg,var(--green),#00A880);
+  border:none;border-radius:9px;color:var(--navy);
+  font-size:12px;font-weight:800;font-family:inherit;
+  cursor:pointer;transition:.2s;
+}
+.job-apply:hover{transform:scale(1.01);}
+
+/* ════════════════════════════════
+   AI DOUBT CHAT
+════════════════════════════════ */
+.chat-wrap{
+  display:flex;flex-direction:column;
+  height:calc(100vh - 200px);min-height:400px;
+}
+.chat-msgs{
+  flex:1;overflow-y:auto;padding:10px 0;
+  display:flex;flex-direction:column;gap:12px;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+.msg{display:flex;gap:9px;align-items:flex-start;}
+.msg.user{flex-direction:row-reverse;}
+.msg-avatar{
+  width:32px;height:32px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;flex-shrink:0;
+}
+.msg.ai .msg-avatar{background:linear-gradient(135deg,var(--saffron),var(--saffron2));}
+.msg.user .msg-avatar{background:linear-gradient(135deg,var(--purple),#9B88FF);}
+.msg-bubble{
+  max-width:82%;padding:12px 14px;border-radius:14px;
+  font-size:13px;line-height:1.65;
+}
+.msg.ai .msg-bubble{
+  background:var(--card);border:1px solid var(--border);
+  border-top-left-radius:4px;
+}
+.msg.user .msg-bubble{
+  background:linear-gradient(135deg,rgba(255,107,0,.2),rgba(255,140,56,.1));
+  border:1px solid rgba(255,107,0,.2);
+  border-top-right-radius:4px;
+}
+.msg-bubble img{max-width:100%;border-radius:8px;margin-top:8px;}
+.typing-dots{display:flex;gap:4px;padding:4px 0;}
+.typing-dots span{
+  width:7px;height:7px;background:var(--text2);border-radius:50%;
+  animation:bounce .8s infinite;
+}
+.typing-dots span:nth-child(2){animation-delay:.15s;}
+.typing-dots span:nth-child(3){animation-delay:.3s;}
+@keyframes bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}}
+
+.chat-input-row{
+  display:flex;gap:8px;align-items:flex-end;
+  padding:12px 0 0;border-top:1px solid var(--border);margin-top:8px;
+}
+.chat-input{
+  flex:1;background:var(--navy2);border:1px solid var(--border);
+  border-radius:12px;padding:11px 14px;
+  color:var(--text1);font-size:13px;font-family:inherit;
+  resize:none;outline:none;max-height:100px;
+  transition:.2s;line-height:1.5;
+}
+.chat-input:focus{border-color:var(--saffron);}
+.chat-btns{display:flex;gap:7px;flex-shrink:0;}
+.img-btn{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--navy3);border:1px solid var(--border);
+  color:var(--text2);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:.2s;
+}
+.img-btn:hover{border-color:var(--saffron);color:var(--saffron);}
+.send-btn{
+  width:40px;height:40px;border-radius:10px;
+  background:linear-gradient(135deg,var(--saffron),var(--saffron2));
+  border:none;color:#fff;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.2s;
+}
+.send-btn:hover{transform:scale(1.05);}
+#img-file{display:none;}
+.chat-suggestions{
+  display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;
+}
+.sug-btn{
+  padding:6px 12px;border-radius:20px;
+  background:var(--navy3);border:1px solid var(--border);
+  color:var(--text2);font-size:11px;font-family:inherit;
+  cursor:pointer;transition:.2s;
+}
+.sug-btn:hover{border-color:var(--saffron);color:var(--saffron);}
+
+/* ════════════════════════════════
+   PAPERS
+════════════════════════════════ */
+.paper-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;margin-bottom:10px;
+  display:flex;align-items:center;gap:12px;
+}
+.paper-icon{
+  width:46px;height:46px;background:rgba(255,107,0,.1);
+  border:1px solid rgba(255,107,0,.2);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.paper-info{flex:1;}
+.paper-title{font-size:14px;font-weight:700;}
+.paper-meta{font-size:11px;color:var(--text2);margin-top:3px;}
+.paper-acts{display:flex;gap:6px;flex-shrink:0;}
+.pbtn{
+  padding:6px 11px;border-radius:8px;border:none;
+  font-size:11px;font-weight:700;font-family:inherit;cursor:pointer;transition:.2s;
+}
+.pbtn-o{background:transparent;border:1px solid var(--border);color:var(--text2);}
+.pbtn-o:hover{border-color:var(--saffron);color:var(--saffron);}
+.pbtn-s{background:var(--saffron);color:#fff;}
+
+/* ════════════════════════════════
+   PREMIUM MODAL
+════════════════════════════════ */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.8);backdrop-filter:blur(4px);
+  z-index:200;align-items:flex-end;justify-content:center;
+}
+.overlay.open{display:flex;}
+.sheet{
+  background:var(--navy2);border:1px solid var(--border);
+  border-radius:24px 24px 0 0;padding:22px 18px 36px;
+  width:100%;max-width:500px;
+  animation:slideUp .3s ease;
+}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.sheet-handle{width:38px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 18px;}
+.plan-box{
+  background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(255,165,0,.05));
+  border:2px solid var(--gold);border-radius:var(--radius);
+  padding:18px;text-align:center;margin-bottom:14px;
+}
+.plan-price{font-size:34px;font-weight:800;color:var(--gold);}
+.plan-per{font-size:12px;color:var(--text2);}
+.feat-list{margin:14px 0;}
+.feat{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 0;font-size:13px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.feat:last-child{border:none;}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:76px;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--card);border:1px solid var(--green);
+  color:var(--green);padding:10px 18px;border-radius:11px;
+  font-size:12px;font-weight:600;opacity:0;transition:.3s;
+  z-index:300;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── LOADING ── */
+.skeleton{
+  background:linear-gradient(90deg,var(--navy2) 25%,var(--navy3) 50%,var(--navy2) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:11px;height:68px;margin-bottom:10px;
+}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+.empty{text-align:center;padding:36px 20px;color:var(--text2);}
+.empty-icon{font-size:44px;margin-bottom:10px;}
+.empty-t{font-size:14px;font-weight:600;}
+.empty-s{font-size:12px;margin-top:5px;}
+
+/* Loading spinner */
+.spinner{
+  width:18px;height:18px;border:2px solid rgba(255,255,255,.3);
+  border-top-color:#fff;border-radius:50%;
+  animation:spin .6s linear infinite;display:inline-block;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+    <div class="logo">
+      <div class="logo-box">📚</div>
+      <div class="logo-name">Pariksha<span>Mitra</span></div>
+    </div>
+    <div class="hdr-right">
+      <button class="btn-lang" id="langBtn" onclick="toggleLang()">EN</button>
+      <button class="btn-premium" onclick="openPremium()">⭐ Pro</button>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <button class="ntab active" onclick="goTo('home',this)">🏠 <span data-h="होम" data-e="Home">होम</span></button>
+    <button class="ntab" onclick="goTo('quiz',this)">📝 <span data-h="क्विज़" data-e="Quiz">क्विज़</span></button>
+    <button class="ntab" onclick="goTo('papers',this)">📄 <span data-h="पेपर्स" data-e="Papers">पेपर्स</span></button>
+    <button class="ntab" onclick="goTo('news',this)">📰 <span data-h="न्यूज़" data-e="News">न्यूज़</span></button>
+    <button class="ntab" onclick="goTo('jobs',this)">💼 <span data-h="नौकरी" data-e="Jobs">नौकरी</span></button>
+    <button class="ntab" onclick="goTo('exams',this)">📅 <span data-h="परीक्षाएं" data-e="Exams">परीक्षाएं</span></button>
+    <button class="ntab" onclick="goTo('chat',this)">🤖 <span data-h="AI चैट" data-e="AI Chat">AI चैट</span></button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══ HOME ══ -->
+<section id="home" class="sec active">
+  <div class="welcome">
+    <div class="welcome-emoji">🎯</div>
+    <div>
+      <h2 data-h="आज की तैयारी करें!" data-e="Start Today's Preparation!">आज की तैयारी करें!</h2>
+      <p data-h="SSC • UPSC • Railway • Bank — सब एक जगह" data-e="SSC • UPSC • Railway • Bank — All in one">SSC • UPSC • Railway • Bank — सब एक जगह</p>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-n" id="s-q">200+</div>
+      <div class="stat-l" data-h="प्रश्न" data-e="Questions">प्रश्न</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" id="s-score">0</div>
+      <div class="stat-l" data-h="मेरा स्कोर" data-e="My Score">मेरा स्कोर</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" id="s-streak">0🔥</div>
+      <div class="stat-l" data-h="स्ट्रीक" data-e="Streak">स्ट्रीक</div>
+    </div>
+  </div>
+
+  <div class="exam-grid">
+    <div class="exam-card ssc" onclick="startExam('SSC')">
+      <div class="exam-icon">🏛️</div>
+      <div class="exam-name">SSC</div>
+      <div class="exam-sub">CGL • CHSL • MTS</div>
+    </div>
+    <div class="exam-card upsc" onclick="startExam('UPSC')">
+      <div class="exam-icon">⚖️</div>
+      <div class="exam-name">UPSC</div>
+      <div class="exam-sub">IAS • IPS • IFS</div>
+    </div>
+    <div class="exam-card rail" onclick="startExam('Railway')">
+      <div class="exam-icon">🚂</div>
+      <div class="exam-name">Railway</div>
+      <div class="exam-sub">NTPC • Group D</div>
+    </div>
+    <div class="exam-card bank" onclick="startExam('Bank')">
+      <div class="exam-icon">🏦</div>
+      <div class="exam-name">Bank PO</div>
+      <div class="exam-sub">IBPS • SBI • RBI</div>
+    </div>
+  </div>
+
+  <div class="stitle" style="font-size:15px;margin-bottom:10px;">📅 <span data-h="आने वाली परीक्षाएं" data-e="Upcoming Exams">आने वाली परीक्षाएं</span></div>
+  <div id="home-exams"></div>
+</section>
+
+<!-- ══ QUIZ ══ -->
+<section id="quiz" class="sec">
+  <div id="qlist">
+    <div class="stitle">📝 <span data-h="क्विज़ अभ्यास" data-e="Quiz Practice">क्विज़ अभ्यास</span></div>
+    <div class="ssub" data-h="विषय चुनकर practice करें" data-e="Choose subject and practice">विषय चुनकर practice करें</div>
+    <div class="chips" id="exam-chips">
+      <button class="chip on" onclick="filterQ('all',this)">All</button>
+      <button class="chip" onclick="filterQ('SSC',this)">SSC</button>
+      <button class="chip" onclick="filterQ('UPSC',this)">UPSC</button>
+      <button class="chip" onclick="filterQ('Railway',this)">Railway</button>
+      <button class="chip" onclick="filterQ('Bank',this)">Bank</button>
+    </div>
+    <div id="quiz-list-container"></div>
+  </div>
+
+  <div id="qplayer">
+    <div class="qbar">
+      <div>
+        <div style="font-size:14px;font-weight:700;" id="qp-title">Quiz</div>
+        <div style="font-size:11px;color:var(--text2);" id="qp-count">Q 1/10</div>
+      </div>
+      <div class="qtimer" id="qtimer">10:00</div>
+    </div>
+    <div class="qprog"><div class="qprog-fill" id="qprog" style="width:0%"></div></div>
+    <div class="qcard">
+      <div class="qnum" id="qnum">Question 1</div>
+      <div class="qtext" id="qtext">Loading...</div>
+      <div class="opts" id="qopts"></div>
+      <div class="explain-box" id="explain"></div>
+    </div>
+    <div class="qnav">
+      <button class="btn btn-ghost" onclick="exitQuiz()">✕ Exit</button>
+      <button class="btn btn-primary" id="qnext" onclick="nextQ()" disabled style="flex:1;justify-content:center;">Next →</button>
+    </div>
+  </div>
+
+  <div id="qresult">
+    <div class="result-card">
+      <div style="font-size:38px;" id="r-emoji">🎉</div>
+      <div class="r-pct" id="r-pct">0%</div>
+      <div class="r-msg" id="r-msg">Well Done!</div>
+      <div class="r-meta" id="r-meta">0/10</div>
+      <div class="r-stats">
+        <div class="r-stat"><div class="r-stat-n" id="r-c" style="color:var(--green)">0</div><div class="r-stat-l">Correct ✓</div></div>
+        <div class="r-stat"><div class="r-stat-n" id="r-w" style="color:var(--red)">0</div><div class="r-stat-l">Wrong ✗</div></div>
+        <div class="r-stat"><div class="r-stat-n" id="r-t">0:00</div><div class="r-stat-l">Time</div></div>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="retryQ()">🔄 Try Again</button>
+    <button class="btn btn-ghost btn-block" style="margin-top:8px;" onclick="backToList()">← Back</button>
+  </div>
+</section>
+
+<!-- ══ PAPERS ══ -->
+<section id="papers" class="sec">
+  <div class="stitle">📄 <span data-h="Previous Year Papers" data-e="Previous Year Papers">Previous Year Papers</span></div>
+  <div class="ssub" data-h="Answer key के साथ practice करें" data-e="Practice with answer key">Answer key के साथ practice करें</div>
+  <div class="chips" id="paper-chips">
+    <button class="chip on" onclick="filterP('all',this)">All</button>
+    <button class="chip" onclick="filterP('SSC',this)">SSC</button>
+    <button class="chip" onclick="filterP('UPSC',this)">UPSC</button>
+    <button class="chip" onclick="filterP('Railway',this)">Railway</button>
+    <button class="chip" onclick="filterP('Bank',this)">Bank</button>
+  </div>
+  <div id="papers-container"></div>
+</section>
+
+<!-- ══ NEWS ══ -->
+<section id="news" class="sec">
+  <div class="stitle">📰 <span data-h="करंट अफेयर्स" data-e="Current Affairs">करंट अफेयर्स</span></div>
+  <div class="ssub" id="news-updated">Auto updated daily</div>
+  <div class="ca-tabs">
+    <button class="ca-tab on" onclick="filterCA('daily',this)" data-h="आज" data-e="Today">आज</button>
+    <button class="ca-tab" onclick="filterCA('weekly',this)" data-h="सप्ताह" data-e="Week">सप्ताह</button>
+    <button class="ca-tab" onclick="filterCA('monthly',this)" data-h="माह" data-e="Month">माह</button>
+  </div>
+  <div class="chips" id="news-cats"></div>
+  <div id="news-container"></div>
+</section>
+
+<!-- ══ JOBS ══ -->
+<section id="jobs" class="sec">
+  <div class="stitle">💼 <span data-h="सरकारी नौकरी" data-e="Govt Jobs">सरकारी नौकरी</span></div>
+  <div class="ssub" data-h="नई और आने वाली भर्तियाँ" data-e="New and upcoming recruitments">नई और आने वाली भर्तियाँ</div>
+  <div class="chips" id="job-chips">
+    <button class="chip on" onclick="filterJ('all',this)">All</button>
+    <button class="chip" onclick="filterJ('new',this)">🆕 New</button>
+    <button class="chip" onclick="filterJ('SSC',this)">SSC</button>
+    <button class="chip" onclick="filterJ('UPSC',this)">UPSC</button>
+    <button class="chip" onclick="filterJ('Railway',this)">Railway</button>
+    <button class="chip" onclick="filterJ('Bank',this)">Bank</button>
+  </div>
+  <div id="jobs-container"></div>
+</section>
+
+<!-- ══ EXAMS ══ -->
+<section id="exams" class="sec">
+  <div class="stitle">📅 <span data-h="परीक्षा कैलेंडर" data-e="Exam Calendar">परीक्षा कैलेंडर</span></div>
+  <div class="ssub" data-h="Active और upcoming exams — countdown के साथ" data-e="Active and upcoming exams with countdown">Active और upcoming exams — countdown के साथ</div>
+  <div class="chips" id="exam-filter-chips">
+    <button class="chip on" onclick="filterExam('all',this)">All</button>
+    <button class="chip" onclick="filterExam('active',this)" data-h="Active" data-e="Active">Active</button>
+    <button class="chip" onclick="filterExam('upcoming',this)" data-h="Upcoming" data-e="Upcoming">Upcoming</button>
+  </div>
+  <div id="exams-container"></div>
+</section>
+
+<!-- ══ AI CHAT ══ -->
+<section id="chat" class="sec">
+  <div class="stitle">🤖 <span data-h="AI Doubt Solver" data-e="AI Doubt Solver">AI Doubt Solver</span></div>
+  <div class="ssub" data-h="कोई भी सवाल पूछो — Text या Image" data-e="Ask anything — Text or Image">कोई भी सवाल पूछो — Text या Image</div>
+
+  <div class="chat-wrap">
+    <div class="chat-suggestions" id="suggestions">
+      <button class="sug-btn" onclick="askSug(this)">SSC GK question explain करो</button>
+      <button class="sug-btn" onclick="askSug(this)">UPSC syllabus बताओ</button>
+      <button class="sug-btn" onclick="askSug(this)">Railway exam pattern</button>
+      <button class="sug-btn" onclick="askSug(this)">Current affairs summary</button>
+    </div>
+
+    <div class="chat-msgs" id="chat-msgs">
+      <div class="msg ai">
+        <div class="msg-avatar">📚</div>
+        <div class="msg-bubble" data-h="नमस्ते! मैं ParikshaMitra AI हूँ। SSC, UPSC, Railway, Bank — किसी भी विषय का doubt पूछो। Text या Image दोनों से पूछ सकते हो! 🎯" data-e="Hello! I'm ParikshaMitra AI. Ask me anything about SSC, UPSC, Railway, Bank exams. You can ask via text or image! 🎯">नमस्ते! मैं ParikshaMitra AI हूँ। SSC, UPSC, Railway, Bank — किसी भी विषय का doubt पूछो। Text या Image दोनों से पूछ सकते हो! 🎯</div>
+      </div>
+    </div>
+
+    <div class="chat-input-row">
+      <textarea class="chat-input" id="chat-input" placeholder="सवाल लिखो..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"
+        oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+      <div class="chat-btns">
+        <button class="img-btn" onclick="document.getElementById('img-file').click()" title="Image upload">🖼️</button>
+        <button class="send-btn" onclick="sendMsg()">➤</button>
+      </div>
+    </div>
+    <input type="file" id="img-file" accept="image/*" onchange="handleImg(this)">
+  </div>
+</section>
+
+</main>
+
+<!-- PREMIUM MODAL -->
+<div class="overlay" id="premium-modal" onclick="if(event.target===this)closePremium()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div style="text-align:center;font-size:20px;font-weight:800;margin-bottom:6px;">⭐ Premium Plan</div>
+    <div style="text-align:center;font-size:13px;color:var(--text2);margin-bottom:18px;" data-h="सब unlock, बिना ads" data-e="Unlock everything, no ads">सब unlock, बिना ads</div>
+    <div class="plan-box">
+      <div class="plan-price">₹49</div>
+      <div class="plan-per">/month • Cancel anytime</div>
+    </div>
+    <div class="feat-list">
+      <div class="feat">✅ Unlimited Mock Tests</div>
+      <div class="feat">✅ All Previous Year Papers</div>
+      <div class="feat">✅ Monthly Current Affairs PDF</div>
+      <div class="feat">✅ No Advertisements</div>
+      <div class="feat">✅ AI Doubt Chat Unlimited</div>
+      <div class="feat">✅ Performance Analytics</div>
+    </div>
+    <button class="btn btn-primary btn-block" style="font-size:15px;padding:14px;" onclick="buyPremium()">🚀 Subscribe ₹49/month</button>
+    <button class="btn btn-ghost btn-block" style="margin-top:8px;" onclick="closePremium()">Maybe later</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+//  CONFIG — APNI GEMINI KEY YAHAN DAALO
+// ══════════════════════════════════════════
+const CFG = {
+  // aistudio.google.com se free key lo
+  GEMINI_KEY: "YOUR_GEMINI_API_KEY_HERE",
+
+  // GitHub username aur repo naam
+  GITHUB_USER: "YOUR_GITHUB_USERNAME",
+  REPO_NAME:   "pariksha-mitra",
+};
+
+// Data URLs (GitHub Pages se)
+const BASE = `https://${CFG.GITHUB_USER}.github.io/${CFG.REPO_NAME}`;
+const URLS = {
+  affairs: `${BASE}/data/affairs.json`,
+  jobs:    `${BASE}/data/jobs.json`,
+  quiz:    `${BASE}/data/quiz.json`,
+};
+
+// ══════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════
+let LANG = "h";
+let affairsData = [], jobsData = [], quizData = {quizzes:[], questions:{}};
+let caFilter = "daily", catFilter = "all", jobFilter = "all", qExamFilter = "all";
+let paperFilter = "all", examFilter = "all";
+let currentQuiz = null, currentQs = [], qIdx = 0, correct = 0, wrong = 0;
+let timerSec = 0, timerInt = null, startTime = 0, selectedAns = -1;
+let chatHistory = [];
+let pendingImg = null;
+
+// ══════════════════════════════════════════
+//  SAMPLE DATA (jab tak JSON files load nahi)
+// ══════════════════════════════════════════
+const SAMPLE_QUIZZES = [
+  {id:1,exam:"SSC",subject:"General Knowledge",subjectHi:"सामान्य ज्ञान",title:"SSC GK Practice",titleHi:"SSC सामान्य ज्ञान",questions:10,time:10,difficulty:"Medium",free:true,questionKey:"SSC_General_Knowledge"},
+  {id:2,exam:"SSC",subject:"Mathematics",subjectHi:"गणित",title:"SSC Mathematics",titleHi:"SSC गणित",questions:10,time:10,difficulty:"Hard",free:true,questionKey:"SSC_Mathematics"},
+  {id:3,exam:"UPSC",subject:"Polity",subjectHi:"राजव्यवस्था",title:"UPSC Polity",titleHi:"UPSC राजव्यवस्था",questions:10,time:12,difficulty:"Hard",free:false,questionKey:"UPSC_Polity"},
+  {id:4,exam:"Railway",subject:"Reasoning",subjectHi:"तर्कशक्ति",title:"Railway Reasoning",titleHi:"Railway तर्कशक्ति",questions:10,time:10,difficulty:"Medium",free:true,questionKey:"Railway_Reasoning"},
+  {id:5,exam:"Bank",subject:"English",subjectHi:"अंग्रेजी",title:"Bank PO English",titleHi:"Bank PO अंग्रेजी",questions:10,time:10,difficulty:"Medium",free:false,questionKey:"Bank_English"},
+  {id:6,exam:"SSC",subject:"Hindi Grammar",subjectHi:"हिंदी व्याकरण",title:"SSC Hindi",titleHi:"SSC हिंदी",questions:10,time:10,difficulty:"Easy",free:true,questionKey:"SSC_Hindi"},
+];
+
+const SAMPLE_QS = {
+  SSC_General_Knowledge:[
+    {question:"India's national animal?",questionHi:"भारत का राष्ट्रीय पशु?",optA:"Lion",optB:"Tiger",optC:"Elephant",optD:"Leopard",answer:"B",difficulty:"Easy",explanation:"Bengal Tiger is India's national animal since 1973.",explanationHi:"बंगाल टाइगर 1973 से भारत का राष्ट्रीय पशु है।"},
+    {question:"When was Constitution enacted?",questionHi:"संविधान कब लागू हुआ?",optA:"15 Aug 1947",optB:"26 Jan 1950",optC:"2 Oct 1949",optD:"26 Nov 1949",answer:"B",difficulty:"Easy",explanation:"Indian Constitution came into effect on 26 January 1950.",explanationHi:"भारतीय संविधान 26 जनवरी 1950 को लागू हुआ।"},
+    {question:"Largest state by area?",questionHi:"क्षेत्रफल में सबसे बड़ा राज्य?",optA:"Maharashtra",optB:"MP",optC:"Rajasthan",optD:"UP",answer:"C",difficulty:"Easy",explanation:"Rajasthan is the largest state by area in India.",explanationHi:"राजस्थान क्षेत्रफल की दृष्टि से भारत का सबसे बड़ा राज्य है।"},
+    {question:"India's first PM?",questionHi:"भारत के प्रथम प्रधानमंत्री?",optA:"Sardar Patel",optB:"Gandhi",optC:"Nehru",optD:"Rajendra Prasad",answer:"C",difficulty:"Easy",explanation:"Jawaharlal Nehru was India's first Prime Minister.",explanationHi:"जवाहरलाल नेहरू भारत के प्रथम प्रधानमंत्री थे।"},
+    {question:"National flower of India?",questionHi:"भारत का राष्ट्रीय फूल?",optA:"Rose",optB:"Sunflower",optC:"Jasmine",optD:"Lotus",answer:"D",difficulty:"Easy",explanation:"Lotus (Nelumbo nucifera) is India's national flower.",explanationHi:"कमल (Nelumbo nucifera) भारत का राष्ट्रीय फूल है।"},
+    {question:"Indian currency symbol ₹ introduced in?",questionHi:"₹ चिह्न कब अपनाया गया?",optA:"2008",optB:"2010",optC:"2009",optD:"2012",answer:"B",difficulty:"Medium",explanation:"The ₹ symbol was officially adopted in 2010.",explanationHi:"₹ चिह्न आधिकारिक रूप से 2010 में अपनाया गया।"},
+    {question:"Largest continent?",questionHi:"सबसे बड़ा महाद्वीप?",optA:"Africa",optB:"North America",optC:"Asia",optD:"Europe",answer:"C",difficulty:"Easy",explanation:"Asia is the world's largest continent.",explanationHi:"एशिया विश्व का सबसे बड़ा महाद्वीप है।"},
+    {question:"Capital of Australia?",questionHi:"ऑस्ट्रेलिया की राजधानी?",optA:"Sydney",optB:"Melbourne",optC:"Canberra",optD:"Perth",answer:"C",difficulty:"Medium",explanation:"Canberra is the capital of Australia, not Sydney.",explanationHi:"कैनबरा ऑस्ट्रेलिया की राजधानी है, सिडनी नहीं।"},
+    {question:"Panchayati Raj related article?",questionHi:"पंचायती राज कौन से अनुच्छेद में?",optA:"Article 40",optB:"Article 32",optC:"Article 356",optD:"Article 21",answer:"A",difficulty:"Hard",explanation:"Article 40 directs states to organise village panchayats.",explanationHi:"अनुच्छेद 40 राज्यों को ग्राम पंचायत बनाने का निर्देश देता है।"},
+    {question:"Author of 'Discovery of India'?",questionHi:"'भारत की खोज' के लेखक?",optA:"Gandhi",optB:"Nehru",optC:"Tagore",optD:"Ambedkar",answer:"B",difficulty:"Medium",explanation:"Jawaharlal Nehru wrote 'Discovery of India' in 1946.",explanationHi:"जवाहरलाल नेहरू ने 1946 में 'भारत की खोज' लिखी।"},
+  ],
+  Railway_Reasoning:[
+    {question:"Series: 2, 6, 12, 20, 30, ?",questionHi:"श्रृंखला: 2, 6, 12, 20, 30, ?",optA:"40",optB:"42",optC:"44",optD:"46",answer:"B",difficulty:"Medium",explanation:"Differences: 4,6,8,10,12 — next = 30+12 = 42",explanationHi:"अंतर: 4,6,8,10,12 — अगला = 30+12 = 42"},
+    {question:"ABCD : DCBA :: MNOP : ?",questionHi:"ABCD : DCBA :: MNOP : ?",optA:"PONM",optB:"PNOM",optC:"ONPM",optD:"NOPM",answer:"A",difficulty:"Medium",explanation:"Reverse the letters: MNOP → PONM",explanationHi:"अक्षरों को उल्टा करें: MNOP → PONM"},
+    {question:"If ROSE = 6821, FLOOR = ?",questionHi:"यदि ROSE = 6821, तो FLOOR = ?",optA:"56336",optB:"35336",optC:"56663",optD:"56663",answer:"A",difficulty:"Hard",explanation:"R=6,O=8,S=2,E=1,F=5,L=3 → FLOOR=56336",explanationHi:"R=6,O=8,S=2,E=1,F=5,L=3 → FLOOR=56336"},
+    {question:"Odd one out: 2, 3, 5, 7, 9, 11",questionHi:"विषम खोजो: 2, 3, 5, 7, 9, 11",optA:"2",optB:"3",optC:"9",optD:"11",answer:"C",difficulty:"Easy",explanation:"9 = 3×3 is not a prime number, rest are prime.",explanationHi:"9 = 3×3 अभाज्य संख्या नहीं है, बाकी सब अभाज्य हैं।"},
+    {question:"Mirror image concept: 6:42 — clock shows?",questionHi:"Mirror image: 6:42 — घड़ी में?",optA:"5:18",optB:"6:18",optC:"5:42",optD:"6:42",answer:"A",difficulty:"Hard",explanation:"Mirror of 6:42 = 12:00-6:42 = 5:18",explanationHi:"Mirror = 12:00-6:42 = 5:18"},
+    {question:"Pawan is son of Ravi. Ravi's sister is Priya. Priya's son is Rohan. How is Pawan related to Rohan?",questionHi:"पवन रवि का पुत्र है। रवि की बहन प्रिया है। प्रिया का पुत्र रोहन है। पवन का रोहन से क्या रिश्ता?",optA:"Brother",optB:"Uncle",optC:"Cousin",optD:"Nephew",answer:"C",difficulty:"Medium",explanation:"Pawan and Rohan share the same grandparents — they are cousins.",explanationHi:"पवन और रोहन के दादा-दादी समान हैं — वे चचेरे भाई हैं।"},
+    {question:"Complete: ACE, BDF, CEG, ?",questionHi:"पूरा करें: ACE, BDF, CEG, ?",optA:"DFH",optB:"EGI",optC:"CFH",optD:"DGI",answer:"A",difficulty:"Medium",explanation:"Each letter in the group advances by 1: C→D, E→F, G→H",explanationHi:"प्रत्येक अक्षर 1 से बढ़ता है: C→D, E→F, G→H"},
+    {question:"5 + 3 × 2 - 4 ÷ 2 = ?",questionHi:"5 + 3 × 2 - 4 ÷ 2 = ?",optA:"8",optB:"9",optC:"7",optD:"11",answer:"B",difficulty:"Easy",explanation:"BODMAS: 5 + 6 - 2 = 9",explanationHi:"BODMAS: 5 + 6 - 2 = 9"},
+    {question:"How many triangles in a triangle divided into 4 equal parts?",questionHi:"एक त्रिभुज 4 समान भागों में — कितने त्रिभुज?",optA:"4",optB:"5",optC:"6",optD:"8",answer:"B",difficulty:"Medium",explanation:"4 small + 1 large = 5 triangles total",explanationHi:"4 छोटे + 1 बड़ा = कुल 5 त्रिभुज"},
+    {question:"Statement: All cats are dogs. All dogs are birds. Conclusion: All cats are birds.",questionHi:"कथन: सभी बिल्लियाँ कुत्ते हैं। सभी कुत्ते पक्षी हैं। निष्कर्ष: सभी बिल्लियाँ पक्षी हैं।",optA:"True",optB:"False",optC:"Uncertain",optD:"Partially true",answer:"A",difficulty:"Hard",explanation:"If A⊂B and B⊂C, then A⊂C — syllogism rule.",explanationHi:"यदि A⊂B और B⊂C, तो A⊂C — न्यायवाक्य नियम।"},
+  ],
+};
+
+const SAMPLE_PAPERS = [
+  {id:1,exam:"SSC",year:"2023",title:"SSC CGL Tier-1 2023",titleHi:"SSC CGL टियर-1 2023",pdfUrl:"#",hasAnswers:true,free:true},
+  {id:2,exam:"SSC",year:"2022",title:"SSC CHSL 2022",titleHi:"SSC CHSL 2022",pdfUrl:"#",hasAnswers:true,free:true},
+  {id:3,exam:"UPSC",year:"2023",title:"UPSC Prelims GS-1 2023",titleHi:"UPSC प्रीलिम्स GS-1 2023",pdfUrl:"#",hasAnswers:false,free:false},
+  {id:4,exam:"Railway",year:"2022",title:"RRB NTPC 2022 CBT-1",titleHi:"RRB NTPC 2022 CBT-1",pdfUrl:"#",hasAnswers:true,free:true},
+  {id:5,exam:"Bank",year:"2023",title:"IBPS PO Prelims 2023",titleHi:"IBPS PO प्रीलिम्स 2023",pdfUrl:"#",hasAnswers:false,free:false},
+  {id:6,exam:"SSC",year:"2021",title:"SSC MTS 2021",titleHi:"SSC MTS 2021",pdfUrl:"#",hasAnswers:true,free:true},
+  {id:7,exam:"Railway",year:"2023",title:"RRB Group D 2023",titleHi:"RRB Group D 2023",pdfUrl:"#",hasAnswers:true,free:true},
+];
+
+const SAMPLE_JOBS = [
+  {id:1,title:"SSC CGL 2025",org:"Staff Selection Commission",vacancies:"17727",lastDate:"2025-07-15",type:"new",exam:"SSC",link:"https://ssc.nic.in"},
+  {id:2,title:"UPSC Civil Services 2025",org:"Union Public Service Commission",vacancies:"1056",lastDate:"2025-06-01",type:"new",exam:"UPSC",link:"https://upsc.gov.in"},
+  {id:3,title:"RRB NTPC 2025",org:"Railway Recruitment Board",vacancies:"11558",lastDate:"2025-08-20",type:"upcoming",exam:"Railway",link:"https://indianrailways.gov.in"},
+  {id:4,title:"IBPS PO 2025",org:"IBPS",vacancies:"4455",lastDate:"2025-08-01",type:"upcoming",exam:"Bank",link:"https://ibps.in"},
+  {id:5,title:"SBI Clerk 2025",org:"State Bank of India",vacancies:"13735",lastDate:"2025-06-30",type:"new",exam:"Bank",link:"https://sbi.co.in/careers"},
+  {id:6,title:"UP Police Constable 2025",org:"UPRPB",vacancies:"60244",lastDate:"2025-05-25",type:"new",exam:"Police",link:"https://uppbpb.gov.in"},
+];
+
+const EXAMS_DATA = [
+  {id:1,name:"SSC CGL 2025",org:"Staff Selection Commission",status:"active",startDate:"2025-04-25",endDate:"2025-07-15",examDate:"2025-09-01",desc:"Combined Graduate Level — Group B & C posts. Graduate students apply kar sakte hain.",descHi:"ग्रेजुएट स्तर — Group B & C पद। स्नातक छात्र आवेदन कर सकते हैं।",website:"https://ssc.nic.in",apply:"https://ssc.nic.in",vacancies:"17727"},
+  {id:2,name:"UPSC Civil Services 2025",org:"UPSC",status:"active",startDate:"2025-02-22",endDate:"2025-06-01",examDate:"2025-05-25",desc:"IAS, IPS, IFS aur other Central Services ke liye. India ka sabse prestigious exam.",descHi:"IAS, IPS, IFS और अन्य केंद्रीय सेवाओं के लिए। भारत की सबसे प्रतिष्ठित परीक्षा।",website:"https://upsc.gov.in",apply:"https://upsconline.nic.in",vacancies:"1056"},
+  {id:3,name:"RRB NTPC 2025",org:"Railway Recruitment Board",status:"upcoming",startDate:"2025-06-01",endDate:"2025-08-20",examDate:"2025-10-01",desc:"Non-Technical Popular Categories — Station Master, Clerk, Junior Account Assistant.",descHi:"गैर-तकनीकी लोकप्रिय श्रेणियाँ — स्टेशन मास्टर, क्लर्क, जूनियर अकाउंट असिस्टेंट।",website:"https://rrbcdg.gov.in",apply:"https://rrbapply.gov.in",vacancies:"11558"},
+  {id:4,name:"IBPS PO 2025",org:"IBPS",status:"upcoming",startDate:"2025-07-01",endDate:"2025-08-01",examDate:"2025-10-15",desc:"Bank Probationary Officer recruitment for multiple public sector banks.",descHi:"कई सार्वजनिक क्षेत्र के बैंकों के लिए प्रोबेशनरी ऑफिसर भर्ती।",website:"https://ibps.in",apply:"https://ibps.in",vacancies:"4455"},
+  {id:5,name:"SSC CHSL 2025",org:"Staff Selection Commission",status:"upcoming",startDate:"2025-06-10",endDate:"2025-07-10",examDate:"2025-09-20",desc:"Combined Higher Secondary Level — 10+2 pass candidates ke liye LDC, DEO posts.",descHi:"संयुक्त उच्चतर माध्यमिक स्तर — 10+2 उत्तीर्ण के लिए LDC, DEO पद।",website:"https://ssc.nic.in",apply:"https://ssc.nic.in",vacancies:"3712"},
+];
+
+const SAMPLE_AFFAIRS = [
+  {id:1,date:"2025-05-08",dateDisplay:"08 May 2025",title:"India launches new education scheme",titleHi:"भारत ने नई शिक्षा योजना लॉन्च की",content:"The government launched a new scheme to improve digital education across rural India with ₹10,000 crore budget.",contentHi:"सरकार ने ₹10,000 करोड़ के बजट के साथ ग्रामीण भारत में डिजिटल शिक्षा सुधारने के लिए नई योजना शुरू की।",category:"Education",categoryHi:"शिक्षा",period:"daily",link:"",source:"PIB"},
+  {id:2,date:"2025-05-08",dateDisplay:"08 May 2025",title:"RBI holds repo rate at 6.5%",titleHi:"RBI ने रेपो रेट 6.5% पर बनाए रखी",content:"Reserve Bank of India's MPC decided to keep the repo rate unchanged at 6.5% citing stable inflation outlook.",contentHi:"भारतीय रिजर्व बैंक की MPC ने स्थिर मुद्रास्फीति के मद्देनजर रेपो रेट 6.5% पर अपरिवर्तित रखने का फैसला किया।",category:"Economy",categoryHi:"अर्थव्यवस्था",period:"daily",link:"",source:"RBI"},
+  {id:3,date:"2025-05-07",dateDisplay:"07 May 2025",title:"ISRO successfully launches new satellite",titleHi:"ISRO ने नया सैटेलाइट सफलतापूर्वक लॉन्च किया",content:"ISRO launched GSAT-25 communication satellite from Sriharikota, strengthening India's space capabilities.",contentHi:"ISRO ने श्रीहरिकोटा से GSAT-25 संचार उपग्रह लॉन्च किया, जिससे भारत की अंतरिक्ष क्षमता मजबूत हुई।",category:"Science",categoryHi:"विज्ञान",period:"daily",link:"",source:"ISRO"},
+  {id:4,date:"2025-05-06",dateDisplay:"06 May 2025",title:"India wins gold at Asian Athletics",titleHi:"भारत ने एशियाई एथलेटिक्स में स्वर्ण जीता",content:"Indian athlete won gold medal at Asian Athletics Championship, improving India's overall tally.",contentHi:"भारतीय एथलीट ने एशियाई एथलेटिक्स चैंपियनशिप में स्वर्ण पदक जीता।",category:"Sports",categoryHi:"खेल",period:"weekly",link:"",source:"SAI"},
+  {id:5,date:"2025-05-01",dateDisplay:"01 May 2025",title:"India-Japan sign bilateral trade agreement",titleHi:"भारत-जापान ने द्विपक्षीय व्यापार समझौते पर हस्ताक्षर किए",content:"India and Japan signed a comprehensive bilateral trade agreement during PM's official visit to Tokyo.",contentHi:"PM की टोक्यो यात्रा के दौरान भारत और जापान ने व्यापक द्विपक्षीय व्यापार समझौते पर हस्ताक्षर किए।",category:"International",categoryHi:"अंतर्राष्ट्रीय",period:"monthly",link:"",source:"MEA"},
+];
+
+// ══════════════════════════════════════════
+//  INIT — Load data from JSON files
+// ══════════════════════════════════════════
+async function init() {
+  // Score + streak
+  document.getElementById("s-score").textContent = ls("pm_score") || "0";
+  updateStreak();
+
+  // Try loading from GitHub Pages JSON files
+  try {
+    const [aRes, jRes, qRes] = await Promise.allSettled([
+      fetch(URLS.affairs), fetch(URLS.jobs), fetch(URLS.quiz)
+    ]);
+    if (aRes.status === "fulfilled" && aRes.value.ok) {
+      const d = await aRes.value.json();
+      affairsData = d.affairs || [];
+    }
+    if (jRes.status === "fulfilled" && jRes.value.ok) {
+      const d = await jRes.value.json();
+      jobsData = d.jobs || [];
+    }
+    if (qRes.status === "fulfilled" && qRes.value.ok) {
+      const d = await qRes.value.json();
+      quizData = d;
+    }
+  } catch(e) {}
+
+  // Fallback to sample if empty
+  if (!affairsData.length) affairsData = SAMPLE_AFFAIRS;
+  if (!jobsData.length) jobsData = SAMPLE_JOBS;
+  if (!quizData.quizzes.length) { quizData.quizzes = SAMPLE_QUIZZES; quizData.questions = SAMPLE_QS; }
+
+  // Count
+  const totalQ = Object.values(quizData.questions).reduce((s,v)=>s+v.length,0);
+  document.getElementById("s-q").textContent = (totalQ || 200) + "+";
+
+  renderHomeExams();
+  renderQuizList();
+  renderPapers();
+  renderNews();
+  renderJobs();
+  renderExams();
+}
+
+// ══════════════════════════════════════════
+//  LANGUAGE
+// ══════════════════════════════════════════
+function toggleLang() {
+  LANG = LANG === "h" ? "e" : "h";
+  document.getElementById("langBtn").textContent = LANG === "h" ? "EN" : "HI";
+  document.querySelectorAll("[data-h]").forEach(el => {
+    if (el.tagName !== "INPUT" && el.tagName !== "TEXTAREA")
+      el.textContent = LANG === "h" ? el.dataset.h : el.dataset.e;
+  });
+  renderAll();
+}
+
+function t(obj, hKey, eKey) {
+  return LANG === "h" ? (obj[hKey] || obj[eKey] || "") : (obj[eKey] || obj[hKey] || "");
+}
+
+// ══════════════════════════════════════════
+//  NAV
+// ══════════════════════════════════════════
+function goTo(id, btn) {
+  document.querySelectorAll(".sec").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".ntab").forEach(t => t.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  btn.classList.add("active");
+}
+
+function renderAll() {
+  renderHomeExams(); renderQuizList(); renderPapers();
+  renderNews(); renderJobs(); renderExams();
+}
+
+// ══════════════════════════════════════════
+//  HOME EXAMS
+// ══════════════════════════════════════════
+function renderHomeExams() {
+  const el = document.getElementById("home-exams");
+  const active = EXAMS_DATA.filter(e => e.status === "active").slice(0, 2);
+  el.innerHTML = active.map(e => examCardHTML(e, true)).join("");
+  startCountdowns();
+}
+
+function startExam(exam) {
+  qExamFilter = exam;
+  document.querySelectorAll("#exam-chips .chip").forEach(c => {
+    c.classList.toggle("on", c.textContent.trim() === exam);
+  });
+  goTo("quiz", document.querySelectorAll(".ntab")[1]);
+  renderQuizList();
+}
+
+// ══════════════════════════════════════════
+//  QUIZ LIST
+// ══════════════════════════════════════════
+const EXAM_COLORS = {SSC:"#FF6B00",UPSC:"#7C6FF7",Railway:"#00D4A0",Bank:"#FFD700"};
+const EXAM_ICONS  = {SSC:"🏛️",UPSC:"⚖️",Railway:"🚂",Bank:"🏦"};
+
+function renderQuizList() {
+  const c = document.getElementById("quiz-list-container");
+  const list = quizData.quizzes.filter(q =>
+    qExamFilter === "all" || q.exam === qExamFilter
+  );
+  if (!list.length) { c.innerHTML = emptyHTML("📝","No quizzes found","Change filter"); return; }
+  const col = (e) => EXAM_COLORS[e] || "#FF6B00";
+  c.innerHTML = list.map(q => `
+    <div class="quiz-card" onclick="startQuiz(${q.id})">
+      <div class="qc-icon" style="background:${col(q.exam)}20;border:1px solid ${col(q.exam)}40">${EXAM_ICONS[q.exam]||"📝"}</div>
+      <div class="qc-info">
+        <div class="qc-title">${t(q,"titleHi","title")}</div>
+        <div class="qc-meta">${q.questions} Qs • ${q.time} min • ${q.difficulty} • ${q.exam}</div>
+      </div>
+      <div class="qc-badge ${q.free?"free-badge":"pro-badge"}">${q.free?"Free":"⭐ Pro"}</div>
+    </div>`).join("");
+}
+
+function filterQ(exam, btn) {
+  qExamFilter = exam;
+  document.querySelectorAll("#exam-chips .chip").forEach(c => c.classList.remove("on"));
+  btn.classList.add("on");
+  renderQuizList();
+}
+
+// ══════════════════════════════════════════
+//  QUIZ PLAYER
+// ══════════════════════════════════════════
+function startQuiz(id) {
+  const q = quizData.quizzes.find(x => x.id === id);
+  if (!q) return;
+  if (!q.free) { openPremium(); return; }
+
+  const qs = quizData.questions[q.questionKey] || SAMPLE_QS[q.questionKey] || SAMPLE_QS["SSC_General_Knowledge"];
+  currentQuiz = q; currentQs = [...qs];
+  qIdx = 0; correct = 0; wrong = 0; selectedAns = -1;
+  startTime = Date.now();
+
+  document.getElementById("qlist").style.display = "none";
+  document.getElementById("qplayer").style.display = "block";
+  document.getElementById("qresult").style.display = "none";
+  document.getElementById("qp-title").textContent = t(q,"titleHi","title");
+  timerSec = q.time * 60;
+  startTimer(); renderQ();
+}
+
+function renderQ() {
+  const q = currentQs[qIdx];
+  document.getElementById("qnum").textContent = `Question ${qIdx+1}`;
+  document.getElementById("qp-count").textContent = `Q ${qIdx+1}/${currentQs.length}`;
+  document.getElementById("qtext").textContent = t(q,"questionHi","question");
+  document.getElementById("qprog").style.width = (qIdx/currentQs.length*100)+"%";
+  document.getElementById("qnext").disabled = true;
+  document.getElementById("explain").classList.remove("show");
+  document.getElementById("explain").textContent = "";
+  selectedAns = -1;
+
+  const opts = LANG==="h"
+    ? [q.optA,q.optB,q.optC,q.optD]
+    : [q.optA,q.optB,q.optC,q.optD];
+  const labels = ["A","B","C","D"];
+
+  document.getElementById("qopts").innerHTML = opts.map((o,i) => `
+    <button class="opt" onclick="selectAns(${i})" id="opt${i}">
+      <span class="opt-lbl">${labels[i]}</span>${o}
+    </button>`).join("");
+}
+
+function selectAns(idx) {
+  if (selectedAns !== -1) return;
+  selectedAns = idx;
+  const q = currentQs[qIdx];
+  const ansIdx = ["A","B","C","D"].indexOf(q.answer);
+
+  document.querySelectorAll(".opt").forEach((btn,i) => {
+    btn.disabled = true;
+    if (i === ansIdx) btn.classList.add("correct");
+    else if (i === idx) btn.classList.add("wrong");
+  });
+
+  if (idx === ansIdx) correct++; else wrong++;
+  document.getElementById("qnext").disabled = false;
+
+  // Show explanation
+  const ex = t(q,"explanationHi","explanation");
+  if (ex) {
+    document.getElementById("explain").textContent = "💡 " + ex;
+    document.getElementById("explain").classList.add("show");
+  }
+}
+
+function nextQ() {
+  qIdx++;
+  if (qIdx >= currentQs.length) endQuiz();
+  else renderQ();
+}
+
+function endQuiz() {
+  clearInterval(timerInt);
+  const elapsed = Math.floor((Date.now()-startTime)/1000);
+  const total = currentQs.length;
+  const pct = Math.round(correct/total*100);
+
+  document.getElementById("qplayer").style.display = "none";
+  document.getElementById("qresult").style.display = "block";
+  document.getElementById("r-pct").textContent = pct+"%";
+
+  const [em,msg,msgH] = pct>=80 ? ["🎉","Excellent!","शानदार!"] : pct>=60 ? ["👍","Good Job!","अच्छा किया!"] : ["📚","Keep Practicing!","अभ्यास जारी रखें!"];
+  document.getElementById("r-emoji").textContent = em;
+  document.getElementById("r-msg").textContent = LANG==="h" ? msgH : msg;
+  document.getElementById("r-meta").textContent = `${correct}/${total} correct`;
+  document.getElementById("r-c").textContent = correct;
+  document.getElementById("r-w").textContent = wrong;
+  const m=Math.floor(elapsed/60), s=elapsed%60;
+  document.getElementById("r-t").textContent = `${m}:${s.toString().padStart(2,"0")}`;
+
+  const prev = parseInt(ls("pm_score")||"0");
+  setLs("pm_score", prev+correct);
+  document.getElementById("s-score").textContent = prev+correct;
+  updateStreak();
+}
+
+function exitQuiz() {
+  clearInterval(timerInt);
+  document.getElementById("qlist").style.display = "block";
+  document.getElementById("qplayer").style.display = "none";
+  document.getElementById("qresult").style.display = "none";
+}
+
+function retryQ() { if (currentQuiz) startQuiz(currentQuiz.id); }
+function backToList() { exitQuiz(); }
+
+function startTimer() {
+  clearInterval(timerInt);
+  timerInt = setInterval(()=>{
+    timerSec--;
+    const m=Math.floor(timerSec/60), s=timerSec%60;
+    const el = document.getElementById("qtimer");
+    el.textContent = `${m}:${s.toString().padStart(2,"0")}`;
+    if (timerSec<=60) el.classList.add("warn");
+    if (timerSec<=0) { clearInterval(timerInt); endQuiz(); }
+  }, 1000);
+}
+
+// ══════════════════════════════════════════
+//  PAPERS
+// ══════════════════════════════════════════
+function renderPapers() {
+  const c = document.getElementById("papers-container");
+  const list = SAMPLE_PAPERS.filter(p => paperFilter==="all" || p.exam===paperFilter);
+  c.innerHTML = list.map(p=>`
+    <div class="paper-card">
+      <div class="paper-icon">📄</div>
+      <div class="paper-info">
+        <div class="paper-title">${t(p,"titleHi","title")}</div>
+        <div class="paper-meta">${p.exam} • ${p.year} • ${p.hasAnswers?"✓ With Answers":"No Answer Key"}</div>
+      </div>
+      <div class="paper-acts">
+        ${p.hasAnswers?`<button class="pbtn pbtn-o" onclick="openPaper('${p.pdfUrl}')">📖</button>`:""}
+        <button class="pbtn pbtn-s" onclick="${p.free?`openPaper('${p.pdfUrl}')`:"openPremium()"}">
+          ${p.free?"⬇️":"⭐"}
+        </button>
+      </div>
+    </div>`).join("");
+}
+
+function filterP(ex, btn) {
+  paperFilter = ex;
+  document.querySelectorAll("#paper-chips .chip").forEach(c=>c.classList.remove("on"));
+  btn.classList.add("on"); renderPapers();
+}
+
+function openPaper(url) {
+  if (url && url !== "#") window.open(url,"_blank");
+  else toast("PDF coming soon! 📄");
+}
+
+// ══════════════════════════════════════════
+//  NEWS
+// ══════════════════════════════════════════
+function renderNews() {
+  // Render category chips
+  const cats = [...new Set(affairsData.map(a=>a.category))].filter(Boolean);
+  document.getElementById("news-cats").innerHTML =
+    `<button class="chip on" onclick="filterCat('all',this)">All</button>` +
+    cats.map(c=>`<button class="chip" onclick="filterCat('${c}',this)">${c}</button>`).join("");
+
+  const updated = affairsData[0]?.dateDisplay || "";
+  if (updated) document.getElementById("news-updated").textContent = `Last updated: ${updated}`;
+
+  _renderNews();
+}
+
+function _renderNews() {
+  const c = document.getElementById("news-container");
+  let data = affairsData.filter(a => {
+    const periodMatch = caFilter==="daily" ? a.period==="daily" :
+                        caFilter==="weekly" ? ["daily","weekly"].includes(a.period) : true;
+    const catMatch = catFilter==="all" || a.category===catFilter;
+    return periodMatch && catMatch;
+  });
+
+  if (!data.length) { c.innerHTML = emptyHTML("📰","No news found","Change filter"); return; }
+  c.innerHTML = data.map(a=>`
+    <div class="ca-card" onclick="this.classList.toggle('open')">
+      <div class="ca-date">${a.dateDisplay || a.date}</div>
+      <div class="ca-title">${t(a,"titleHi","title")}</div>
+      <div class="ca-content">${t(a,"contentHi","content")}</div>
+      <span class="ca-cat">${t(a,"categoryHi","category")}</span>
+      ${a.source?`<div class="ca-src">📌 ${a.source}</div>`:""}
+    </div>`).join("");
+}
+
+function filterCA(p,btn) {
+  caFilter=p;
+  document.querySelectorAll(".ca-tab").forEach(t=>t.classList.remove("on"));
+  btn.classList.add("on"); _renderNews();
+}
+
+function filterCat(cat,btn) {
+  catFilter=cat;
+  document.querySelectorAll("#news-cats .chip").forEach(c=>c.classList.remove("on"));
+  btn.classList.add("on"); _renderNews();
+}
+
+// ══════════════════════════════════════════
+//  JOBS
+// ══════════════════════════════════════════
+function renderJobs() {
+  const c = document.getElementById("jobs-container");
+  const today = new Date();
+  let data = jobsData.filter(j =>
+    jobFilter==="all" ? true :
+    jobFilter==="new" ? j.type==="new" :
+    j.exam===jobFilter
+  );
+  if (!data.length) { c.innerHTML = emptyHTML("💼","No jobs found","Change filter"); return; }
+
+  c.innerHTML = data.map(j => {
+    const last = new Date(j.lastDate);
+    const diff = Math.ceil((last-today)/(1000*60*60*24));
+    const cls = diff>14?"days-safe":diff>7?"days-warn":"days-danger";
+    const dateStr = last.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+    return `
+    <div class="job-card">
+      <div class="job-head">
+        <div>
+          <div class="job-title">${j.title}</div>
+          <div class="job-org">${j.org}</div>
+        </div>
+        <div class="days-badge ${cls}">${diff>0?diff+"d left":"Closed"}</div>
+      </div>
+      <div class="job-details">
+        <div class="job-detail">👥 ${j.vacancies} Posts</div>
+        <div class="job-detail">📅 ${dateStr}</div>
+        <div class="job-detail">📝 ${j.exam||"Govt"}</div>
+        <div class="job-detail">${j.type==="new"?"🆕 New":"📅 Upcoming"}</div>
+      </div>
+      <button class="job-apply" onclick="window.open('${j.link||"#"}','_blank')">
+        Apply Now →
+      </button>
+    </div>`}).join("");
+}
+
+function filterJ(f,btn) {
+  jobFilter=f;
+  document.querySelectorAll("#job-chips .chip").forEach(c=>c.classList.remove("on"));
+  btn.classList.add("on"); renderJobs();
+}
+
+// ══════════════════════════════════════════
+//  EXAMS + COUNTDOWN
+// ══════════════════════════════════════════
+function renderExams() {
+  const c = document.getElementById("exams-container");
+  const data = EXAMS_DATA.filter(e =>
+    examFilter==="all" ? true : e.status===examFilter
+  );
+  c.innerHTML = data.map(e => examCardHTML(e, false)).join("");
+  startCountdowns();
+}
+
+function examCardHTML(e, mini) {
+  const today = new Date();
+  const end = new Date(e.endDate);
+  const diff = Math.ceil((end-today)/(1000*60*60*24));
+  const badgeCls = e.status==="active"?"badge-active":e.status==="upcoming"?"badge-upcoming":"badge-closed";
+  const badgeTxt = e.status==="active"?"🟢 Active":e.status==="upcoming"?"📅 Upcoming":"🔴 Closed";
+
+  return `
+  <div class="exam-countdown-card">
+    <div class="ec-header">
+      <div>
+        <div class="ec-name">${e.name}</div>
+        <div class="ec-org">${e.org} • ${e.vacancies} Posts</div>
+      </div>
+      <div class="ec-badge ${badgeCls}">${badgeTxt}</div>
+    </div>
+    <div class="countdown-boxes" id="cd-${e.id}">
+      <div class="cd-box"><div class="cd-num" id="cd-d-${e.id}">--</div><div class="cd-label">Days</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-h-${e.id}">--</div><div class="cd-label">Hours</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-m-${e.id}">--</div><div class="cd-label">Mins</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-s-${e.id}">--</div><div class="cd-label">Secs</div></div>
+    </div>
+    ${!mini ? `<div class="ec-desc">${t(e,"descHi","desc")}</div>` : ""}
+    <div class="ec-links">
+      <a class="ec-link info" href="${e.website}" target="_blank">🌐 Website</a>
+      <a class="ec-link apply" href="${e.apply}" target="_blank">📝 Apply</a>
+    </div>
+  </div>`;
+}
+
+function filterExam(f,btn) {
+  examFilter=f;
+  document.querySelectorAll("#exam-filter-chips .chip").forEach(c=>c.classList.remove("on"));
+  btn.classList.add("on"); renderExams();
+}
+
+function startCountdowns() {
+  EXAMS_DATA.forEach(e => {
+    const target = new Date(e.endDate);
+    function tick() {
+      const now = new Date();
+      const diff = target - now;
+      if (diff <= 0) {
+        ["d","h","m","s"].forEach(x => {
+          const el = document.getElementById(`cd-${x}-${e.id}`);
+          if (el) el.textContent = "0";
+        });
+        return;
+      }
+      const d = Math.floor(diff/(1000*60*60*24));
+      const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+      const m = Math.floor((diff%(1000*60*60))/(1000*60));
+      const s = Math.floor((diff%( 1000*60))/1000);
+      const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
+      set(`cd-d-${e.id}`,d); set(`cd-h-${e.id}`,h);
+      set(`cd-m-${e.id}`,m); set(`cd-s-${e.id}`,s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  });
+}
+
+// ══════════════════════════════════════════
+//  AI DOUBT CHAT (Gemini)
+// ══════════════════════════════════════════
+function askSug(btn) {
+  document.getElementById("chat-input").value = btn.textContent;
+  document.getElementById("suggestions").style.display = "none";
+  sendMsg();
+}
+
+async function sendMsg() {
+  const input = document.getElementById("chat-input");
+  const text = input.value.trim();
+  if (!text && !pendingImg) return;
+
+  const userText = text || "Image ke baare mein batao";
+  input.value = "";
+  input.style.height = "auto";
+
+  // Add user message
+  addMsg("user", userText, pendingImg);
+  pendingImg = null;
+
+  // Typing indicator
+  const typingId = addTyping();
+
+  // Build history for Gemini
+  chatHistory.push({ role:"user", parts:[{ text: buildSystemPrompt() + "\n\nUser: " + userText }] });
+
+  try {
+    const reply = await callGemini(userText);
+    removeTyping(typingId);
+    addMsg("ai", reply);
+    chatHistory.push({ role:"model", parts:[{ text: reply }] });
+  } catch(e) {
+    removeTyping(typingId);
+    addMsg("ai", "Maafi chahta hoon, abhi jawab dene mein dikkat aa rahi hai. Thodi der baad try karo. 🙏");
+  }
+}
+
+function buildSystemPrompt() {
+  return `You are ParikshaMitra AI, an expert tutor for Indian competitive exams (SSC, UPSC, Railway, Bank PO).
+Answer in ${LANG==="h"?"Hindi (Devanagari script)":"simple English"}.
+Be concise, accurate, and helpful. Use bullet points for clarity.
+Focus on exam-relevant content. For MCQs, explain the correct answer clearly.`;
+}
+
+async function callGemini(userText) {
+  if (!CFG.GEMINI_KEY || CFG.GEMINI_KEY === "YOUR_GEMINI_API_KEY_HERE") {
+    return LANG==="h"
+      ? "Gemini API key setup nahi hai abhi. aistudio.google.com pe jaao, free key lo aur index.html mein CFG.GEMINI_KEY mein daalo! 🔑"
+      : "Gemini API key not set up yet. Go to aistudio.google.com, get your free key and add it in CFG.GEMINI_KEY in index.html! 🔑";
+  }
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${CFG.GEMINI_KEY}`;
+  const body = {
+    contents:[{ role:"user", parts:[{ text: buildSystemPrompt()+"\n\nUser: "+userText }] }],
+    generationConfig:{ temperature:0.7, maxOutputTokens:800 }
+  };
+
+  const res = await fetch(url, {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify(body)
+  });
+  const data = await res.json();
+  return data.candidates?.[0]?.content?.parts?.[0]?.text || "Koi jawab nahi mila.";
+}
+
+function addMsg(role, text, imgSrc) {
+  const c = document.getElementById("chat-msgs");
+  const d = document.createElement("div");
+  d.className = `msg ${role}`;
+  const imgHtml = imgSrc ? `<img src="${imgSrc}" alt="uploaded">` : "";
+  d.innerHTML = `
+    <div class="msg-avatar">${role==="ai"?"📚":"👤"}</div>
+    <div class="msg-bubble">${text.replace(/\n/g,"<br>")}${imgHtml}</div>`;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
+
+function addTyping() {
+  const c = document.getElementById("chat-msgs");
+  const d = document.createElement("div");
+  d.className = "msg ai";
+  const id = "typing-" + Date.now();
+  d.id = id;
+  d.innerHTML = `<div class="msg-avatar">📚</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
+  return id;
+}
+
+function removeTyping(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+function handleImg(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    pendingImg = e.target.result;
+    toast("Image ready! Ab send karo 📸");
+  };
+  reader.readAsDataURL(file);
+  input.value = "";
+}
+
+// ══════════════════════════════════════════
+//  PREMIUM
+// ══════════════════════════════════════════
+function openPremium() { document.getElementById("premium-modal").classList.add("open"); }
+function closePremium() { document.getElementById("premium-modal").classList.remove("open"); }
+function buyPremium() { toast("Payment integration coming soon! 🚀"); closePremium(); }
+
+// ══════════════════════════════════════════
+//  STREAK
+// ══════════════════════════════════════════
+function updateStreak() {
+  const today = new Date().toDateString();
+  const last = ls("pm_last_day");
+  let streak = parseInt(ls("pm_streak")||"0");
+  if (last !== today) {
+    const yesterday = new Date(); yesterday.setDate(yesterday.getDate()-1);
+    if (last === yesterday.toDateString()) streak++;
+    else if (last !== today) streak = 1;
+    setLs("pm_last_day", today);
+    setLs("pm_streak", streak);
+  }
+  document.getElementById("s-streak").textContent = streak + "🔥";
+}
+
+// ══════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════
+function toast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg; el.classList.add("show");
+  setTimeout(()=>el.classList.remove("show"), 2800);
+}
+
+function emptyHTML(icon, text, sub) {
+  return `<div class="empty"><div class="empty-icon">${icon}</div><div class="empty-t">${text}</div><div class="empty-s">${sub}</div></div>`;
+}
+
+function ls(k) { try { return localStorage.getItem(k); } catch(e) { return null; } }
+function setLs(k,v) { try { localStorage.setItem(k,v); } catch(e) {} }
+
+// ══════════════════════════════════════════
+//  START
+// ══════════════════════════════════════════
+init();
+</script>
+</body>
+</html>
