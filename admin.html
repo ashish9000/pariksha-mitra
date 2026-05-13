@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ParikshaMitra — Admin</title>
+<style>
+:root {
+  --saffron: #FF6B00;
+  --navy: #0A1628;
+  --navy2: #112240;
+  --navy3: #1A3055;
+  --card: rgba(17,34,64,0.95);
+  --green: #00D4A0;
+  --gold: #FFD700;
+  --red: #FF4757;
+  --blue: #4A9EFF;
+  --text1: #F0F6FF;
+  --text2: #8BA7C7;
+  --border: rgba(255,107,0,0.2);
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body {
+  font-family: -apple-system, 'Segoe UI', sans-serif;
+  background: var(--navy);
+  color: var(--text1);
+  min-height: 100vh;
+}
+
+/* ── LOGIN ── */
+#login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: radial-gradient(ellipse at center, rgba(255,107,0,0.08) 0%, transparent 70%);
+}
+.login-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+.login-icon { font-size: 48px; margin-bottom: 12px; }
+.login-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+.login-sub { font-size: 13px; color: var(--text2); margin-bottom: 24px; }
+.login-input {
+  width: 100%;
+  background: var(--navy2);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--text1);
+  font-size: 16px;
+  font-family: inherit;
+  text-align: center;
+  letter-spacing: 3px;
+  outline: none;
+  margin-bottom: 14px;
+  transition: .2s;
+}
+.login-input:focus { border-color: var(--saffron); }
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--saffron), #FF8C38);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+}
+.login-error {
+  color: var(--red);
+  font-size: 13px;
+  margin-top: 10px;
+  display: none;
+}
+
+/* ── ADMIN PANEL ── */
+#admin-panel { display: none; }
+
+/* Header */
+.adm-header {
+  background: rgba(10,22,40,0.98);
+  border-bottom: 1px solid var(--border);
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.adm-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 54px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.adm-logo { font-size: 16px; font-weight: 800; }
+.adm-logo span { color: var(--saffron); }
+.logout-btn {
+  padding: 6px 14px;
+  background: rgba(255,71,87,0.15);
+  border: 1px solid rgba(255,71,87,0.3);
+  border-radius: 20px;
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Nav */
+.adm-nav {
+  background: rgba(10,22,40,0.95);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  top: 54px;
+  z-index: 99;
+}
+.adm-nav::-webkit-scrollbar { display: none; }
+.adm-nav-inner {
+  display: flex;
+  padding: 0 8px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.atab {
+  padding: 11px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--text2);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: .2s;
+}
+.atab.active { color: var(--saffron); border-bottom-color: var(--saffron); }
+
+/* Main */
+.adm-main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 16px 14px 80px;
+}
+.asec { display: none; }
+.asec.active { display: block; }
+
+/* Cards */
+.acard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.acard-title {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Form */
+.form-group { margin-bottom: 12px; }
+.form-label { font-size: 12px; color: var(--text2); margin-bottom: 5px; display: block; font-weight: 600; }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 13px;
+  color: var(--text1);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: .2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--saffron);
+}
+.form-textarea { resize: vertical; min-height: 80px; }
+.form-select option { background: var(--navy2); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* Buttons */
+.btn {
+  padding: 11px 20px;
+  border-radius: 10px;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:active { transform: scale(.97); }
+.btn-primary { background: linear-gradient(135deg, var(--saffron), #FF8C38); color: white; }
+.btn-green { background: linear-gradient(135deg, var(--green), #00A880); color: var(--navy); }
+.btn-red { background: rgba(255,71,87,.15); border: 1px solid rgba(255,71,87,.3); color: var(--red); }
+.btn-block { width: 100%; justify-content: center; }
+.btn-sm { padding: 6px 12px; font-size: 11px; }
+
+/* Status badge */
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+}
+.dot-green { background: var(--green); }
+.dot-gold { background: var(--gold); }
+.dot-red { background: var(--red); }
+
+/* List items */
+.list-item {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.list-item-info { flex: 1; }
+.list-item-title { font-size: 13px; font-weight: 700; }
+.list-item-meta { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.list-item-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+/* Stats */
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+.stat-box {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+.stat-num { font-size: 24px; font-weight: 800; color: var(--saffron); }
+.stat-lbl { font-size: 11px; color: var(--text2); margin-top: 3px; }
+
+/* Notification log */
+.notif-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  font-size: 12px;
+}
+.notif-item:last-child { border: none; }
+.notif-time { color: var(--text2); flex-shrink: 0; }
+.notif-msg { color: var(--text1); }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--navy3);
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  transition: .3s;
+  z-index: 300;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Success/Error alerts */
+.alert {
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  display: none;
+}
+.alert-success { background: rgba(0,212,160,.1); border: 1px solid rgba(0,212,160,.3); color: var(--green); }
+.alert-error { background: rgba(255,71,87,.1); border: 1px solid rgba(255,71,87,.3); color: var(--red); }
+.alert.show { display: block; }
+
+/* Pending review */
+.pending-badge {
+  background: rgba(255,215,0,.15);
+  color: var(--gold);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.approved-badge {
+  background: rgba(0,212,160,.15);
+  color: var(--green);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-icon">🔐</div>
+    <div class="login-title">Admin Panel</div>
+    <div class="login-sub">ParikshaMitra — Restricted Access</div>
+    <input type="password" class="login-input" id="secret-input"
+      placeholder="Enter secret code"
+      onkeydown="if(event.key==='Enter') checkLogin()">
+    <button class="login-btn" onclick="checkLogin()">🚀 Login</button>
+    <div class="login-error" id="login-error">❌ Wrong code! Try again.</div>
+  </div>
+</div>
+
+<!-- ══ ADMIN PANEL ══ -->
+<div id="admin-panel">
+
+  <div class="adm-header">
+    <div class="adm-hdr">
+      <div class="adm-logo">Pariksha<span>Mitra</span> Admin</div>
+      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </div>
+  </div>
+
+  <nav class="adm-nav">
+    <div class="adm-nav-inner">
+      <button class="atab active" onclick="goTab('dashboard',this)">📊 Dashboard</button>
+      <button class="atab" onclick="goTab('exams',this)">📅 Exams</button>
+      <button class="atab" onclick="goTab('papers',this)">📄 Papers</button>
+      <button class="atab" onclick="goTab('jobs',this)">💼 Jobs</button>
+      <button class="atab" onclick="goTab('review',this)">✅ Review</button>
+      <button class="atab" onclick="goTab('notify',this)">🔔 Alerts</button>
+      <button class="atab" onclick="goTab('settings',this)">⚙️ Settings</button>
+    </div>
+  </nav>
+
+  <div class="adm-main">
+
+    <!-- ── DASHBOARD ── -->
+    <div id="tab-dashboard" class="asec active">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-num" id="d-exams">5</div>
+          <div class="stat-lbl">Active Exams</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="d-papers">7</div>
+          <div class="stat-lbl">Papers</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="d-jobs">6</div>
+          <div class="stat-lbl">Job Alerts</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="d-pending" style="color:var(--gold)">0</div>
+          <div class="stat-lbl">Pending Review</div>
+        </div>
+      </div>
+
+      <div class="acard">
+        <div class="acard-title">🤖 AI Automation Status</div>
+        <div class="list-item">
+          <div class="list-item-info">
+            <div class="list-item-title"><span class="status-dot dot-green"></span>Daily News Fetch</div>
+            <div class="list-item-meta">Roz raat 11:30 PM IST</div>
+          </div>
+          <span class="approved-badge">Active</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-info">
+            <div class="list-item-title"><span class="status-dot dot-green"></span>Weekly Quiz Gen</div>
+            <div class="list-item-meta">Har Sunday 8 AM IST</div>
+          </div>
+          <span class="approved-badge">Active</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-info">
+            <div class="list-item-title"><span class="status-dot dot-green"></span>Jobs Alert</div>
+            <div class="list-item-meta">Har 6 ghante</div>
+          </div>
+          <span class="approved-badge">Active</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-info">
+            <div class="list-item-title"><span class="status-dot dot-gold"></span>Telegram Bot</div>
+            <div class="list-item-meta">ParikshaMitra Admin</div>
+          </div>
+          <span class="pending-badge">Connected</span>
+        </div>
+      </div>
+
+      <div class="acard">
+        <div class="acard-title">⚡ Quick Actions</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <button class="btn btn-primary" onclick="goTab('exams',document.querySelectorAll('.atab')[1])">📅 Add Exam</button>
+          <button class="btn btn-green" onclick="goTab('papers',document.querySelectorAll('.atab')[2])">📄 Add Paper</button>
+          <button class="btn btn-primary" onclick="goTab('jobs',document.querySelectorAll('.atab')[3])">💼 Add Job</button>
+          <button class="btn btn-green" onclick="sendTestNotif()">🔔 Test Alert</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EXAMS ── -->
+    <div id="tab-exams" class="asec">
+
+      <!-- Add Exam Form -->
+      <div class="acard">
+        <div class="acard-title">📅 Add / Edit Exam</div>
+        <div id="exam-alert" class="alert alert-success"></div>
+
+        <div class="form-group">
+          <label class="form-label">Exam Name *</label>
+          <input class="form-input" id="ex-name" placeholder="SSC CGL 2025">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Organization *</label>
+          <input class="form-input" id="ex-org" placeholder="Staff Selection Commission">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Total Vacancies</label>
+          <input class="form-input" id="ex-vac" placeholder="17727" type="number">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Status *</label>
+            <select class="form-select" id="ex-status">
+              <option value="active">🟢 Active</option>
+              <option value="upcoming">📅 Coming Soon</option>
+              <option value="closed">🔴 Expired</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exam Category</label>
+            <select class="form-select" id="ex-cat">
+              <option value="SSC">SSC</option>
+              <option value="UPSC">UPSC</option>
+              <option value="Railway">Railway</option>
+              <option value="Bank">Bank</option>
+              <option value="Police">Police</option>
+              <option value="Defence">Defence</option>
+              <option value="State">State</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Notification Start Date</label>
+            <input class="form-input" id="ex-start" type="date">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Date to Apply *</label>
+            <input class="form-input" id="ex-end" type="date">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Exam Date</label>
+            <input class="form-input" id="ex-examdate" type="date">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Result Date</label>
+            <input class="form-input" id="ex-result" type="date">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Official Website Link *</label>
+          <input class="form-input" id="ex-web" placeholder="https://ssc.nic.in">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Direct Apply Link *</label>
+          <input class="form-input" id="ex-apply" placeholder="https://ssc.nic.in/apply">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Official PDF Link (Notification)</label>
+          <input class="form-input" id="ex-pdf" placeholder="https://ssc.nic.in/notice/2025/abc.pdf">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Short Description (Hindi)</label>
+          <textarea class="form-textarea" id="ex-desc-hi" placeholder="परीक्षा के बारे में संक्षिप्त जानकारी..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Short Description (English)</label>
+          <textarea class="form-textarea" id="ex-desc-en" placeholder="Brief about this exam..."></textarea>
+        </div>
+
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="saveExam()">💾 Save Exam</button>
+          <button class="btn btn-red" onclick="clearExamForm()">✕ Clear</button>
+        </div>
+      </div>
+
+      <!-- Existing Exams List -->
+      <div class="acard">
+        <div class="acard-title">📋 All Exams</div>
+        <div id="exams-list"></div>
+      </div>
+    </div>
+
+    <!-- ── PAPERS ── -->
+    <div id="tab-papers" class="asec">
+      <div class="acard">
+        <div class="acard-title">📄 Add Previous Year Paper</div>
+        <div id="paper-alert" class="alert alert-success"></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Exam *</label>
+            <select class="form-select" id="p-exam">
+              <option value="SSC">SSC</option>
+              <option value="UPSC">UPSC</option>
+              <option value="Railway">Railway</option>
+              <option value="Bank">Bank</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Year *</label>
+            <input class="form-input" id="p-year" placeholder="2024" type="number">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Paper Title *</label>
+          <input class="form-input" id="p-title" placeholder="SSC CGL Tier-1 2024">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Paper Title (Hindi)</label>
+          <input class="form-input" id="p-title-hi" placeholder="SSC CGL टियर-1 2024">
+        </div>
+        <div class="form-group">
+          <label class="form-label">PDF Link (Google Drive / Direct) *</label>
+          <input class="form-input" id="p-pdf" placeholder="https://drive.google.com/...">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Has Answer Key?</label>
+            <select class="form-select" id="p-ans">
+              <option value="true">✅ Yes</option>
+              <option value="false">❌ No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Free or Premium?</label>
+            <select class="form-select" id="p-free">
+              <option value="true">Free</option>
+              <option value="false">Premium</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="savePaper()">💾 Save Paper</button>
+      </div>
+
+      <div class="acard">
+        <div class="acard-title">📋 All Papers</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">
+          💡 PDF Google Drive pe upload karo → Share → "Anyone with link" → Link copy karo
+        </div>
+        <div id="papers-list"></div>
+      </div>
+    </div>
+
+    <!-- ── JOBS ── -->
+    <div id="tab-jobs" class="asec">
+      <div class="acard">
+        <div class="acard-title">💼 Add / Verify Job</div>
+        <div id="job-alert" class="alert alert-success"></div>
+
+        <div class="form-group">
+          <label class="form-label">Job Title *</label>
+          <input class="form-input" id="j-title" placeholder="SSC CGL 2025">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Organization *</label>
+          <input class="form-input" id="j-org" placeholder="Staff Selection Commission">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Vacancies</label>
+            <input class="form-input" id="j-vac" placeholder="17727">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exam Type</label>
+            <select class="form-select" id="j-exam">
+              <option value="SSC">SSC</option>
+              <option value="UPSC">UPSC</option>
+              <option value="Railway">Railway</option>
+              <option value="Bank">Bank</option>
+              <option value="Police">Police</option>
+              <option value="Defence">Defence</option>
+              <option value="State">State</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Last Date *</label>
+            <input class="form-input" id="j-last" type="date">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select class="form-select" id="j-type">
+              <option value="new">🆕 New</option>
+              <option value="upcoming">📅 Upcoming</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Direct Apply Link *</label>
+          <input class="form-input" id="j-link" placeholder="https://ssc.nic.in/apply">
+        </div>
+        <button class="btn btn-primary btn-block" onclick="saveJob()">💾 Save Job</button>
+      </div>
+
+      <div class="acard">
+        <div class="acard-title">📋 All Jobs <span id="jobs-count" style="font-size:12px;color:var(--text2)"></span></div>
+        <div id="jobs-list"></div>
+      </div>
+    </div>
+
+    <!-- ── REVIEW (AI Content) ── -->
+    <div id="tab-review" class="asec">
+      <div class="acard">
+        <div class="acard-title">✅ AI Content Review</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:14px;">
+          AI ne jo content add kiya hai use yahan review karo. Galat content delete karo.
+        </div>
+
+        <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+          <button class="btn btn-sm" style="background:var(--navy3);color:var(--text1);" onclick="showReview('news')">📰 News</button>
+          <button class="btn btn-sm" style="background:var(--navy3);color:var(--text1);" onclick="showReview('quiz')">📝 Quiz</button>
+          <button class="btn btn-sm" style="background:var(--navy3);color:var(--text1);" onclick="showReview('jobs-ai')">💼 Jobs (AI)</button>
+        </div>
+
+        <div id="review-container">
+          <div style="text-align:center;padding:30px;color:var(--text2);">
+            Upar se category select karo
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── NOTIFICATIONS ── -->
+    <div id="tab-notify" class="asec">
+      <div class="acard">
+        <div class="acard-title">🔔 Notification Settings</div>
+
+        <div class="list-item" style="margin-bottom:10px;">
+          <div class="list-item-info">
+            <div class="list-item-title">📱 Telegram Bot</div>
+            <div class="list-item-meta">ParikshaMitra Admin Bot</div>
+          </div>
+          <span class="approved-badge">Connected ✓</span>
+        </div>
+
+        <div class="list-item" style="margin-bottom:14px;">
+          <div class="list-item-info">
+            <div class="list-item-title">📧 Email</div>
+            <div class="list-item-meta">shishgupt9000@gmail.com</div>
+          </div>
+          <span class="approved-badge">Set ✓</span>
+        </div>
+
+        <div class="acard-title" style="font-size:13px;margin-bottom:10px;">Alert Types</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;">
+            <input type="checkbox" checked id="n-jobs"> New jobs added by AI
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;">
+            <input type="checkbox" checked id="n-news"> Daily news summary
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;">
+            <input type="checkbox" checked id="n-quiz"> Weekly quiz generated
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;">
+            <input type="checkbox" checked id="n-exam"> Exam deadline reminders
+          </label>
+        </div>
+
+        <button class="btn btn-green btn-block" onclick="sendTestNotif()">
+          🧪 Test Telegram Notification
+        </button>
+      </div>
+
+      <div class="acard">
+        <div class="acard-title">📜 Recent Notifications</div>
+        <div id="notif-log"></div>
+      </div>
+
+      <!-- Manual Notification -->
+      <div class="acard">
+        <div class="acard-title">📢 Send Manual Alert</div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" id="manual-msg" placeholder="Koi important message bhejo students ke liye..."></textarea>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="sendManualAlert()">📤 Send to Telegram</button>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS ── -->
+    <div id="tab-settings" class="asec">
+      <div class="acard">
+        <div class="acard-title">⚙️ App Settings</div>
+
+        <div class="form-group">
+          <label class="form-label">App Name</label>
+          <input class="form-input" id="s-appname" value="ParikshaMitra">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Admin Email</label>
+          <input class="form-input" id="s-email" value="shishgupt9000@gmail.com" type="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">GitHub Username</label>
+          <input class="form-input" id="s-github" value="ashish9000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Repo Name</label>
+          <input class="form-input" id="s-repo" value="ParikshaMitra">
+        </div>
+        <button class="btn btn-primary btn-block" onclick="saveSettings()">💾 Save Settings</button>
+      </div>
+
+      <div class="acard">
+        <div class="acard-title">🔑 Change Admin Password</div>
+        <div class="form-group">
+          <label class="form-label">Current Password</label>
+          <input class="form-input" id="old-pass" type="password">
+        </div>
+        <div class="form-group">
+          <label class="form-label">New Password</label>
+          <input class="form-input" id="new-pass" type="password">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm New Password</label>
+          <input class="form-input" id="conf-pass" type="password">
+        </div>
+        <button class="btn btn-primary btn-block" onclick="changePassword()">🔐 Change Password</button>
+      </div>
+
+      <div class="acard">
+        <div class="acard-title" style="color:var(--red);">⚠️ Danger Zone</div>
+        <button class="btn btn-red btn-block" onclick="clearAllData()">🗑️ Clear All Local Data</button>
+      </div>
+    </div>
+
+  </div><!-- adm-main -->
+</div><!-- admin-panel -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+//  CONFIG
+// ══════════════════════════════════════════
+const ADMIN_CFG = {
+  SECRET:      "Ashish4503535",
+  TG_TOKEN:    "8094864949:AAFLr65cX0p1vpSlw1BIafG9SEQv1dR4Eao",
+  TG_CHAT_ID:  "1093722572",
+  ADMIN_EMAIL: "shishgupt9000@gmail.com",
+  GITHUB_USER: "ashish9000",
+  REPO:        "ParikshaMitra",
+};
+
+// ══════════════════════════════════════════
+//  LOGIN
+// ══════════════════════════════════════════
+function checkLogin() {
+  const val = document.getElementById("secret-input").value.trim();
+  const saved = ls("admin_pass") || ADMIN_CFG.SECRET;
+  if (val === saved) {
+    setLs("admin_logged", "1");
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("admin-panel").style.display = "block";
+    initAdmin();
+  } else {
+    document.getElementById("login-error").style.display = "block";
+    document.getElementById("secret-input").value = "";
+    setTimeout(()=> document.getElementById("login-error").style.display="none", 2000);
+  }
+}
+
+function logout() {
+  setLs("admin_logged","0");
+  document.getElementById("admin-panel").style.display = "none";
+  document.getElementById("login-screen").style.display = "flex";
+  document.getElementById("secret-input").value = "";
+}
+
+// Auto login check
+window.onload = () => {
+  if (ls("admin_logged") === "1") {
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("admin-panel").style.display = "block";
+    initAdmin();
+  }
+  document.getElementById("secret-input").addEventListener("keydown", e => {
+    if (e.key === "Enter") checkLogin();
+  });
+};
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+function initAdmin() {
+  renderExamsList();
+  renderPapersList();
+  renderJobsList();
+  renderNotifLog();
+  updateDashboard();
+}
+
+function goTab(id, btn) {
+  document.querySelectorAll(".asec").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".atab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + id).classList.add("active");
+  btn.classList.add("active");
+}
+
+// ══════════════════════════════════════════
+//  DATA — localStorage based
+// ══════════════════════════════════════════
+function getExams()   { return JSON.parse(ls("pm_exams")  || "[]"); }
+function getPapers()  { return JSON.parse(ls("pm_papers") || "[]"); }
+function getJobs()    { return JSON.parse(ls("pm_jobs_manual") || "[]"); }
+
+function saveExams(d)  { setLs("pm_exams",  JSON.stringify(d)); }
+function savePapers(d) { setLs("pm_papers", JSON.stringify(d)); }
+function saveJobs(d)   { setLs("pm_jobs_manual", JSON.stringify(d)); }
+
+// ══════════════════════════════════════════
+//  DASHBOARD
+// ══════════════════════════════════════════
+function updateDashboard() {
+  document.getElementById("d-exams").textContent = getExams().length || 5;
+  document.getElementById("d-papers").textContent = getPapers().length || 7;
+  document.getElementById("d-jobs").textContent = getJobs().length || 6;
+}
+
+// ══════════════════════════════════════════
+//  EXAMS
+// ══════════════════════════════════════════
+function saveExam() {
+  const name = v("ex-name"), org = v("ex-org");
+  if (!name || !org) { showAlert("exam-alert","❌ Name aur Organization required hai!","error"); return; }
+
+  const exams = getExams();
+  const exam = {
+    id: Date.now(),
+    name, org,
+    vacancies: v("ex-vac") || "TBA",
+    status: v("ex-status"),
+    category: v("ex-cat"),
+    startDate: v("ex-start"),
+    endDate: v("ex-end"),
+    examDate: v("ex-examdate"),
+    resultDate: v("ex-result"),
+    website: v("ex-web"),
+    apply: v("ex-apply"),
+    pdfLink: v("ex-pdf"),
+    descHi: v("ex-desc-hi"),
+    desc: v("ex-desc-en"),
+    addedOn: new Date().toLocaleDateString("en-IN"),
+  };
+
+  exams.unshift(exam);
+  saveExams(exams);
+  showAlert("exam-alert", `✅ "${name}" successfully added!`, "success");
+  clearExamForm();
+  renderExamsList();
+  updateDashboard();
+
+  // Telegram notification
+  sendTelegram(`📅 New Exam Added!\n\n🎯 ${name}\n🏛️ ${org}\n👥 ${exam.vacancies} Posts\n📅 Last Date: ${exam.endDate}\n🔗 Apply: ${exam.apply}`);
+  addNotifLog(`📅 Exam added: ${name}`);
+}
+
+function clearExamForm() {
+  ["ex-name","ex-org","ex-vac","ex-start","ex-end","ex-examdate","ex-result","ex-web","ex-apply","ex-pdf","ex-desc-hi","ex-desc-en"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+}
+
+function renderExamsList() {
+  const c = document.getElementById("exams-list");
+  const exams = getExams();
+  if (!exams.length) {
+    c.innerHTML = `<div style="text-align:center;color:var(--text2);padding:20px;font-size:13px;">Koi exam nahi add kiya abhi</div>`;
+    return;
+  }
+  const statusIcon = {active:"🟢",upcoming:"📅",closed:"🔴"};
+  c.innerHTML = exams.map(e => `
+    <div class="list-item">
+      <div class="list-item-info">
+        <div class="list-item-title">${statusIcon[e.status]||"📅"} ${e.name}</div>
+        <div class="list-item-meta">${e.org} • Last: ${e.endDate||"TBA"} • ${e.vacancies} Posts</div>
+      </div>
+      <div class="list-item-actions">
+        <button class="btn btn-sm btn-red" onclick="deleteExam(${e.id})">🗑️</button>
+      </div>
+    </div>`).join("");
+}
+
+function deleteExam(id) {
+  if (!confirm("Delete this exam?")) return;
+  const exams = getExams().filter(e => e.id !== id);
+  saveExams(exams);
+  renderExamsList();
+  updateDashboard();
+  toast("✅ Deleted!");
+}
+
+// ══════════════════════════════════════════
+//  PAPERS
+// ══════════════════════════════════════════
+function savePaper() {
+  const title = v("p-title"), pdf = v("p-pdf");
+  if (!title || !pdf) { showAlert("paper-alert","❌ Title aur PDF link required hai!","error"); return; }
+
+  const papers = getPapers();
+  papers.unshift({
+    id: Date.now(),
+    exam: v("p-exam"),
+    year: v("p-year") || new Date().getFullYear(),
+    title,
+    titleHi: v("p-title-hi") || title,
+    pdfUrl: pdf,
+    hasAnswers: v("p-ans") === "true",
+    free: v("p-free") === "true",
+    addedOn: new Date().toLocaleDateString("en-IN"),
+  });
+  savePapers(papers);
+  showAlert("paper-alert","✅ Paper successfully added!", "success");
+  ["p-title","p-title-hi","p-pdf","p-year"].forEach(id => { document.getElementById(id).value = ""; });
+  renderPapersList();
+  updateDashboard();
+  sendTelegram(`📄 New Paper Added!\n\n📋 ${title}\n📅 Year: ${v("p-year")}\n📝 Exam: ${v("p-exam")}`);
+  addNotifLog(`📄 Paper added: ${title}`);
+}
+
+function renderPapersList() {
+  const c = document.getElementById("papers-list");
+  const papers = getPapers();
+  if (!papers.length) {
+    c.innerHTML = `<div style="text-align:center;color:var(--text2);padding:20px;font-size:13px;">Koi paper nahi add kiya abhi</div>`;
+    return;
+  }
+  c.innerHTML = papers.map(p => `
+    <div class="list-item">
+      <div class="list-item-info">
+        <div class="list-item-title">📄 ${p.title}</div>
+        <div class="list-item-meta">${p.exam} • ${p.year} • ${p.hasAnswers?"✓ With Answers":"No Ans Key"} • ${p.free?"Free":"Premium"}</div>
+      </div>
+      <div class="list-item-actions">
+        <a href="${p.pdfUrl}" target="_blank" class="btn btn-sm btn-green">👁️</a>
+        <button class="btn btn-sm btn-red" onclick="deletePaper(${p.id})">🗑️</button>
+      </div>
+    </div>`).join("");
+}
+
+function deletePaper(id) {
+  if (!confirm("Delete this paper?")) return;
+  savePapers(getPapers().filter(p => p.id !== id));
+  renderPapersList();
+  toast("✅ Deleted!");
+}
+
+// ══════════════════════════════════════════
+//  JOBS
+// ══════════════════════════════════════════
+function saveJob() {
+  const title = v("j-title"), link = v("j-link");
+  if (!title || !link) { showAlert("job-alert","❌ Title aur Apply link required hai!","error"); return; }
+
+  const jobs = getJobs();
+  jobs.unshift({
+    id: Date.now(),
+    title,
+    org: v("j-org"),
+    vacancies: v("j-vac") || "TBA",
+    lastDate: v("j-last"),
+    exam: v("j-exam"),
+    type: v("j-type"),
+    link,
+    verified: true,
+    addedOn: new Date().toLocaleDateString("en-IN"),
+  });
+  saveJobs(jobs);
+  showAlert("job-alert","✅ Job successfully added!", "success");
+  ["j-title","j-org","j-vac","j-last","j-link"].forEach(id => { document.getElementById(id).value = ""; });
+  renderJobsList();
+  updateDashboard();
+  sendTelegram(`💼 New Job Added!\n\n🎯 ${title}\n🏛️ ${v("j-org")}\n👥 ${v("j-vac")} Posts\n📅 Last: ${v("j-last")}\n🔗 Apply: ${link}`);
+  addNotifLog(`💼 Job added: ${title}`);
+}
+
+function renderJobsList() {
+  const c = document.getElementById("jobs-list");
+  const jobs = getJobs();
+  document.getElementById("jobs-count").textContent = `(${jobs.length} total)`;
+  if (!jobs.length) {
+    c.innerHTML = `<div style="text-align:center;color:var(--text2);padding:20px;font-size:13px;">Koi job nahi add ki abhi</div>`;
+    return;
+  }
+  c.innerHTML = jobs.map(j => `
+    <div class="list-item">
+      <div class="list-item-info">
+        <div class="list-item-title">💼 ${j.title}</div>
+        <div class="list-item-meta">${j.org} • Last: ${j.lastDate||"TBA"} • ${j.vacancies} Posts</div>
+      </div>
+      <div class="list-item-actions">
+        <a href="${j.link}" target="_blank" class="btn btn-sm btn-green">🔗</a>
+        <button class="btn btn-sm btn-red" onclick="deleteJob(${j.id})">🗑️</button>
+      </div>
+    </div>`).join("");
+}
+
+function deleteJob(id) {
+  if (!confirm("Delete this job?")) return;
+  saveJobs(getJobs().filter(j => j.id !== id));
+  renderJobsList();
+  toast("✅ Deleted!");
+}
+
+// ══════════════════════════════════════════
+//  REVIEW
+// ══════════════════════════════════════════
+function showReview(type) {
+  const c = document.getElementById("review-container");
+  if (type === "news") {
+    c.innerHTML = `<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px;">📰 News review ke liye GitHub repo mein data/affairs.json dekho<br><br><a href="https://github.com/${ADMIN_CFG.GITHUB_USER}/${ADMIN_CFG.REPO}/blob/main/data/affairs.json" target="_blank" style="color:var(--blue);">GitHub pe dekho →</a></div>`;
+  } else if (type === "quiz") {
+    c.innerHTML = `<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px;">📝 Quiz review ke liye GitHub repo mein data/quiz.json dekho<br><br><a href="https://github.com/${ADMIN_CFG.GITHUB_USER}/${ADMIN_CFG.REPO}/blob/main/data/quiz.json" target="_blank" style="color:var(--blue);">GitHub pe dekho →</a></div>`;
+  } else {
+    c.innerHTML = `<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px;">💼 Jobs review ke liye GitHub repo mein data/jobs.json dekho<br><br><a href="https://github.com/${ADMIN_CFG.GITHUB_USER}/${ADMIN_CFG.REPO}/blob/main/data/jobs.json" target="_blank" style="color:var(--blue);">GitHub pe dekho →</a></div>`;
+  }
+}
+
+// ══════════════════════════════════════════
+//  TELEGRAM
+// ══════════════════════════════════════════
+async function sendTelegram(msg) {
+  try {
+    await fetch(`https://api.telegram.org/bot${ADMIN_CFG.TG_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        chat_id: ADMIN_CFG.TG_CHAT_ID,
+        text: msg,
+        parse_mode: "HTML"
+      })
+    });
+  } catch(e) { console.log("Telegram error:", e); }
+}
+
+async function sendTestNotif() {
+  const msg = `🧪 Test Notification\n\n✅ ParikshaMitra Admin Panel connected!\n📱 Telegram alerts working!\n⏰ ${new Date().toLocaleString("en-IN")}`;
+  await sendTelegram(msg);
+  toast("✅ Test notification bheja Telegram pe!");
+  addNotifLog("🧪 Test notification sent");
+}
+
+async function sendManualAlert() {
+  const msg = v("manual-msg");
+  if (!msg) { toast("❌ Message likho pehle!"); return; }
+  await sendTelegram(`📢 ParikshaMitra Alert!\n\n${msg}`);
+  toast("✅ Alert bheja!");
+  document.getElementById("manual-msg").value = "";
+  addNotifLog(`📢 Manual alert: ${msg.substring(0,30)}...`);
+}
+
+// ══════════════════════════════════════════
+//  NOTIFICATION LOG
+// ══════════════════════════════════════════
+function addNotifLog(msg) {
+  const logs = JSON.parse(ls("pm_notif_log") || "[]");
+  logs.unshift({ time: new Date().toLocaleTimeString("en-IN"), msg });
+  if (logs.length > 50) logs.pop();
+  setLs("pm_notif_log", JSON.stringify(logs));
+  renderNotifLog();
+}
+
+function renderNotifLog() {
+  const c = document.getElementById("notif-log");
+  if (!c) return;
+  const logs = JSON.parse(ls("pm_notif_log") || "[]");
+  if (!logs.length) {
+    c.innerHTML = `<div style="color:var(--text2);font-size:13px;text-align:center;padding:16px;">Koi notification nahi abhi</div>`;
+    return;
+  }
+  c.innerHTML = logs.slice(0,20).map(l => `
+    <div class="notif-item">
+      <span class="notif-time">${l.time}</span>
+      <span class="notif-msg">${l.msg}</span>
+    </div>`).join("");
+}
+
+// ══════════════════════════════════════════
+//  SETTINGS
+// ══════════════════════════════════════════
+function saveSettings() {
+  setLs("pm_settings", JSON.stringify({
+    appName: v("s-appname"),
+    email: v("s-email"),
+    github: v("s-github"),
+    repo: v("s-repo"),
+  }));
+  toast("✅ Settings saved!");
+}
+
+function changePassword() {
+  const old = v("old-pass");
+  const newP = v("new-pass");
+  const conf = v("conf-pass");
+  const current = ls("admin_pass") || ADMIN_CFG.SECRET;
+
+  if (old !== current) { toast("❌ Current password galat hai!"); return; }
+  if (!newP || newP.length < 6) { toast("❌ New password minimum 6 characters!"); return; }
+  if (newP !== conf) { toast("❌ Passwords match nahi kar rahe!"); return; }
+
+  setLs("admin_pass", newP);
+  toast("✅ Password changed successfully!");
+  ["old-pass","new-pass","conf-pass"].forEach(id => document.getElementById(id).value = "");
+}
+
+function clearAllData() {
+  if (!confirm("⚠️ Sab local data clear ho jayega! Sure ho?")) return;
+  ["pm_exams","pm_papers","pm_jobs_manual","pm_notif_log"].forEach(k => localStorage.removeItem(k));
+  initAdmin();
+  toast("✅ Data cleared!");
+}
+
+// ══════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════
+function v(id) { return document.getElementById(id)?.value?.trim() || ""; }
+function ls(k) { try { return localStorage.getItem(k); } catch(e) { return null; } }
+function setLs(k,v) { try { localStorage.setItem(k,v); } catch(e) {} }
+
+function toast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 2800);
+}
+
+function showAlert(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = `alert alert-${type} show`;
+  setTimeout(() => el.classList.remove("show"), 3000);
+}
+</script>
+</body>
+</html>
