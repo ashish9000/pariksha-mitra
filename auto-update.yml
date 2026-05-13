@@ -1,0 +1,146 @@
+name: ParikshaMitra Auto Update + Notifications
+
+on:
+  schedule:
+    - cron: '0 18 * * *'     # Daily 11:30 PM IST — News + Jobs
+    - cron: '0 2 * * 0'      # Sunday 7:30 AM IST — Quiz
+    - cron: '0 3 1 * *'      # Monthly 1st — Summary
+  workflow_dispatch:           # Manual run
+
+jobs:
+
+  # ─── DAILY: News + Jobs + Notification ───────────────────
+  daily-update:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 18 * * *' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests
+
+      - name: Fetch Current Affairs (NewsData + Gemini Hindi)
+        env:
+          NEWSDATA_API_KEY: ${{ secrets.NEWSDATA_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/fetch_affairs.py
+
+      - name: Fetch Govt Jobs
+        env:
+          NEWSDATA_API_KEY: ${{ secrets.NEWSDATA_API_KEY }}
+        run: python scripts/fetch_jobs.py
+
+      - name: Commit Updates
+        id: commit
+        run: |
+          git config --global user.name "ParikshaMitra Bot"
+          git config --global user.email "bot@pariksha.mitra"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "📰 Daily update: $(TZ='Asia/Kolkata' date +'%d %b %Y %I:%M %p IST')"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Send Telegram Notification
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: python scripts/notify.py daily
+
+      - name: Send Email Summary
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+        run: python scripts/send_email.py daily
+
+  # ─── WEEKLY: Quiz + Notification ─────────────────────────
+  weekly-quiz:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 2 * * 0'
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests
+
+      - name: Generate Quiz Questions (Gemini Free)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/generate_quiz.py
+
+      - name: Commit Quiz Update
+        id: quiz_commit
+        run: |
+          git config --global user.name "ParikshaMitra Bot"
+          git config --global user.email "bot@pariksha.mitra"
+          git add data/quiz.json
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "📝 Weekly quiz: $(TZ='Asia/Kolkata' date +'%d %b %Y')"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Notify — Quiz Generated
+        if: steps.quiz_commit.outputs.changed == 'true'
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: python scripts/notify.py weekly
+
+  # ─── MONTHLY: Summary + Cleanup ──────────────────────────
+  monthly-summary:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 3 1 * *'
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests
+
+      - name: Monthly Summary + Cleanup
+        run: python scripts/monthly_summary.py
+
+      - name: Commit Monthly
+        run: |
+          git config --global user.name "ParikshaMitra Bot"
+          git config --global user.email "bot@pariksha.mitra"
+          git add data/
+          git diff --staged --quiet || git commit -m "📊 Monthly: $(TZ='Asia/Kolkata' date +'%B %Y')"
+          git push
+
+      - name: Notify — Monthly Summary
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+        run: |
+          python scripts/notify.py monthly
+          python scripts/send_email.py monthly
